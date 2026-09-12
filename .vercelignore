@@ -1,0 +1,7 @@
+data
+.git
+*.log
+.DS_Store
+Thumbs.db
+.cursor
+agent-transcripts

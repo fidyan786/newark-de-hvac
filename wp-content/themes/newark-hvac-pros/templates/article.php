@@ -1,0 +1,1 @@
+<?php include nhp_theme_dir() . '/templates/page.php';
