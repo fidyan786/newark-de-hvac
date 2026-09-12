@@ -53,6 +53,11 @@
 	<a class="btn btn-call" href="<?php echo esc_url( nhp_phone_tel() ); ?>"><?php echo nhp_icon( 'phone' ); ?> Call Now — 24/7 · <?php echo esc_html( nhp_phone_display() ); ?></a>
 </div>
 <script src="<?php echo esc_url( nhp_asset( 'assets/js/site.js' ) ); ?>?v=<?php echo esc_attr( NHP_VERSION ); ?>" defer></script>
+<script>
+window.NHP_CHAT = <?php echo json_encode( nhp_chat_boot_config(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS ); ?>;
+</script>
+<script src="<?php echo esc_url( nhp_asset( 'assets/js/chatbot-engine.js' ) ); ?>?v=<?php echo esc_attr( NHP_VERSION ); ?>" defer></script>
+<script src="<?php echo esc_url( nhp_asset( 'assets/js/chatbot.js' ) ); ?>?v=<?php echo esc_attr( NHP_VERSION ); ?>" defer></script>
 <?php if ( function_exists( 'wp_footer' ) && ! nhp_is_standalone() ) { wp_footer(); } ?>
 </body>
 </html>

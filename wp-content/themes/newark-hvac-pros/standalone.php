@@ -17,6 +17,10 @@ if ( session_status() !== PHP_SESSION_ACTIVE ) {
 
 $GLOBALS['nhp_form_result'] = nhp_handle_form();
 
+if ( function_exists( 'nhp_handle_chat_api' ) && nhp_handle_chat_api() ) {
+	exit;
+}
+
 $path = parse_url( isset( $_SERVER['REQUEST_URI'] ) ? $_SERVER['REQUEST_URI'] : '/', PHP_URL_PATH );
 $path = trim( (string) $path, '/' );
 

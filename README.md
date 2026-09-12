@@ -37,12 +37,16 @@ Edit `wp-content/themes/newark-hvac-pros/inc/config.php`:
 
 | Key | Current | Notes |
 |-----|---------|--------|
-| `phone_display` / `phone_tel` | `(302) 555-0147` | Reserved 555 example. Put your CallRail / WhatConverts **302** number here. |
-| `email` | `service@newarkhvacpros.com` | Change to a mailbox you monitor. |
+| `phone_display` / `phone_tel` | `(302) 555-0147` | Reserved 555 example. Prefer Vercel env `PHONE_DISPLAY` + `PHONE_TEL`. |
+| `email` | `service@newarkhvacpros.com` | Or set `SITE_EMAIL`. |
 | `address` | `null` | Service-area business until GBP verification has a real Newark address. |
 | `license_note` | Placeholder | Publish the Delaware HVACR license when the contractor is assigned. |
 
-Form leads save as JSON in `/data/leads/` on local preview. Point production at your CRM or form endpoint.
+Optional env vars (Vercel project settings or `.env.local`): `PHONE_DISPLAY`, `PHONE_TEL`, `SITE_EMAIL`, `FORM_WEBHOOK`, `OPENAI_API_KEY` (chatbot wording rewrite only — the widget works without it).
+
+The on-site chatbot is a conversion layer. It does not invent prices or a phone number. Call Now uses the same `tel:` value as the header.
+
+Form leads save as JSON in `/data/leads/` on local preview. Point production at your CRM or form endpoint. Chatbot leads use the same store/webhook when a visitor shares a phone number.
 
 ## What shipped
 
@@ -51,6 +55,7 @@ Form leads save as JSON in `/data/leads/` on local preview. Point production at 
 - Phone in the header and emergency band on every layout
 - Emergency page is phone-first (no form as the primary CTA)
 - Four-field request form (name, phone, ZIP, service)
+- Page-aware HVAC chatbot with intent detection, light qualification, and Call Now
 - Trust bar without fake star counts
 
 **SEO architecture**

@@ -65,6 +65,7 @@ function nhp_handle_form() {
 
 	$lead = array(
 		'created_at' => gmdate( 'c' ),
+		'source'     => 'request_form',
 		'name'       => $name,
 		'phone'      => $phone,
 		'zip'        => $zip,
@@ -73,6 +74,17 @@ function nhp_handle_form() {
 		'page'       => isset( $_SERVER['REQUEST_URI'] ) ? $_SERVER['REQUEST_URI'] : '',
 	);
 
+	nhp_persist_lead( $lead );
+
+	$_SESSION['nhp_form_token'] = bin2hex( random_bytes( 16 ) );
+
+	return array(
+		'ok'      => true,
+		'message' => 'Request received. We call back as quickly as possible — usually within 15 minutes during peak hours. For no heat or no cooling, call ' . nhp_phone_display() . ' now.',
+	);
+}
+
+function nhp_persist_lead( $lead ) {
 	$payload = json_encode( $lead, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
 	$file    = nhp_leads_dir() . '/' . gmdate( 'Ymd-His' ) . '-' . bin2hex( random_bytes( 3 ) ) . '.json';
 	@file_put_contents( $file, $payload );
@@ -92,12 +104,7 @@ function nhp_handle_form() {
 		@file_get_contents( $webhook, false, $ctx );
 	}
 
-	$_SESSION['nhp_form_token'] = bin2hex( random_bytes( 16 ) );
-
-	return array(
-		'ok'      => true,
-		'message' => 'Request received. We call back as quickly as possible — usually within 15 minutes during peak hours. For no heat or no cooling, call ' . nhp_phone_display() . ' now.',
-	);
+	return true;
 }
 
 function nhp_service_options() {

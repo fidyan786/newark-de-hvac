@@ -4,7 +4,7 @@
  * Replace the tracking number before launch (CallRail / WhatConverts, 302 area code).
  */
 if ( ! defined( 'NHP_VERSION' ) ) {
-	define( 'NHP_VERSION', '1.0.2' );
+	define( 'NHP_VERSION', '1.1.0' );
 }
 
 function nhp_config() {
@@ -13,13 +13,16 @@ function nhp_config() {
 		return $config;
 	}
 
+	$phone_display = nhp_env( 'PHONE_DISPLAY', '(302) 555-0147' );
+	$phone_tel     = nhp_normalize_tel( nhp_env( 'PHONE_TEL', '+13025550147' ) );
+
 	$config = array(
 		'brand'          => 'Newark HVAC Pros',
 		'legal_name'     => 'Newark HVAC Pros',
 		'tagline'        => '24/7 Heating & Cooling Dispatch for Newark, DE',
-		'phone_display'  => '(302) 555-0147',
-		'phone_tel'      => '+13025550147',
-		'email'          => 'service@newarkhvacpros.com',
+		'phone_display'  => $phone_display,
+		'phone_tel'      => $phone_tel,
+		'email'          => nhp_env( 'SITE_EMAIL', 'service@newarkhvacpros.com' ),
 		'city'           => 'Newark',
 		'state'          => 'Delaware',
 		'state_code'     => 'DE',
@@ -33,6 +36,7 @@ function nhp_config() {
 		'address'        => null, // Service-area business until a verified Newark address exists.
 		'zips_primary'   => array( '19702', '19711', '19713', '19725' ),
 		'zips_extended'  => array( '19701', '19707', '19720' ),
+		'zips_campus'    => array( '19712', '19714', '19715', '19716', '19717', '19718' ),
 		'communities'    => array(
 			'Newark',
 			'Bear',
@@ -129,6 +133,33 @@ function nhp_phone_display() {
 function nhp_phone_tel() {
 	$c = nhp_config();
 	return 'tel:' . $c['phone_tel'];
+}
+
+function nhp_env( $key, $default = '' ) {
+	$val = getenv( $key );
+	if ( is_string( $val ) && trim( $val ) !== '' ) {
+		return trim( $val );
+	}
+	return $default;
+}
+
+function nhp_normalize_tel( $value ) {
+	$digits = preg_replace( '/\D+/', '', (string) $value );
+	if ( $digits === '' ) {
+		return '';
+	}
+	if ( strlen( $digits ) === 10 ) {
+		return '+1' . $digits;
+	}
+	if ( strlen( $digits ) === 11 && $digits[0] === '1' ) {
+		return '+' . $digits;
+	}
+	return '+' . $digits;
+}
+
+function nhp_phone_is_placeholder() {
+	$digits = preg_replace( '/\D+/', '', nhp_config()['phone_tel'] );
+	return (bool) preg_match( '/55501\d{2}$/', $digits );
 }
 
 function nhp_nav_primary() {

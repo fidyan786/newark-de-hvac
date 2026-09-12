@@ -35,6 +35,14 @@ function nhp_cta_call( $label = null, $class = 'btn btn-call' ) {
 	return '<a class="' . esc_attr( $class ) . '" href="' . esc_url( nhp_phone_tel() ) . '">' . esc_html( $label ) . '</a>';
 }
 
+function nhp_cta_call_now( $label = 'Call Now', $class = 'btn btn-call' ) {
+	$html  = '<div class="nhp-call-now">';
+	$html .= '<p class="nhp-call-now-kicker">Need help now?</p>';
+	$html .= nhp_cta_call( $label, $class );
+	$html .= '</div>';
+	return $html;
+}
+
 function nhp_cta_request( $label = 'Request Service', $class = 'btn btn-secondary' ) {
 	return '<a class="' . esc_attr( $class ) . '" href="' . esc_url( nhp_path( 'contact' ) ) . '">' . esc_html( $label ) . '</a>';
 }

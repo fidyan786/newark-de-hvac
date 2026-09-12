@@ -66,9 +66,9 @@ return array(
 		'meta' => 'Privacy policy for Newark HVAC Pros — how we handle service requests, calls, and analytics.',
 		'h1' => 'Privacy policy',
 		'crumbs' => nhp_crumbs( 'Privacy Policy', 'privacy-policy' ),
-		'intro' => array('This site collects name, phone, ZIP, and service type when you submit the request form. Call tracking may record numbers that dial the published line. We use that information to dispatch HVAC service and to measure advertising — not to sell your household as a marketing list.'),
+		'intro' => array('This site collects name, phone, ZIP, and service type when you submit the request form or the website chatbot. Call tracking may record numbers that dial the published line. We use that information to dispatch HVAC service and to measure advertising — not to sell your household as a marketing list.'),
 		'body' => array(
-			array('h' => 'What we collect','list' => array('Form fields you submit','Call time, duration, and caller ID on the tracking number','Standard server logs and, once configured, GA4 analytics')),
+			array('h' => 'What we collect','list' => array('Form fields you submit','Chatbot details you choose to share (such as ZIP, issue type, name, and phone)','Call time, duration, and caller ID on the tracking number','Standard server logs and, once configured, GA4 analytics')),
 			array('h' => 'What we do not do','p' => array('We do not sell personal information. We do not require an account. Lead files stored on the server are for the operator of this site and the dispatched contractor.')),
 			array('h' => 'Contact','p' => array('Privacy questions: ' . $c['email'])),
 		),

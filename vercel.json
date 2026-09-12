@@ -14,6 +14,8 @@
         "cache-control": "public, max-age=86400, immutable"
       }
     },
+    { "src": "/api/chat-lead", "dest": "/api/index.php?path=api/chat-lead" },
+    { "src": "/api/chat", "dest": "/api/index.php?path=api/chat" },
     { "src": "/(.*)", "dest": "/api/index.php" }
   ],
   "headers": [

@@ -26,6 +26,7 @@ $form_result = isset( $GLOBALS['nhp_form_result'] ) ? $GLOBALS['nhp_form_result'
 	<meta name="twitter:card" content="summary_large_image">
 	<link rel="icon" href="<?php echo esc_url( nhp_asset( 'assets/img/favicon.svg' ) ); ?>" type="image/svg+xml">
 	<link rel="stylesheet" href="<?php echo esc_url( nhp_asset( 'assets/css/main.css' ) ); ?>?v=<?php echo esc_attr( NHP_VERSION ); ?>">
+	<link rel="stylesheet" href="<?php echo esc_url( nhp_asset( 'assets/css/chatbot.css' ) ); ?>?v=<?php echo esc_attr( NHP_VERSION ); ?>">
 	<?php echo nhp_print_schema( array_merge( $page, array( 'slug' => $slug === 'home' ? '' : $slug ) ) ); ?>
 	<?php if ( function_exists( 'wp_head' ) && ! nhp_is_standalone() ) { wp_head(); } ?>
 </head>
