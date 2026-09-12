@@ -29,30 +29,26 @@ if ( $uri === '/api/index.php' || $uri === '/api/index' ) {
 }
 
 $file = $root . $uri;
-if ( $uri !== '/' && is_file( $file ) ) {
-	$ext  = strtolower( pathinfo( $file, PATHINFO_EXTENSION ) );
-	$mime = array(
-		'css'  => 'text/css; charset=UTF-8',
-		'js'   => 'application/javascript; charset=UTF-8',
-		'svg'  => 'image/svg+xml',
-		'png'  => 'image/png',
-		'jpg'  => 'image/jpeg',
-		'jpeg' => 'image/jpeg',
-		'gif'  => 'image/gif',
-		'webp' => 'image/webp',
-		'ico'  => 'image/x-icon',
-		'txt'  => 'text/plain; charset=UTF-8',
-		'xml'  => 'application/xml; charset=UTF-8',
-		'json' => 'application/json; charset=UTF-8',
-		'woff' => 'font/woff',
-		'woff2'=> 'font/woff2',
-	);
-	if ( isset( $mime[ $ext ] ) ) {
-		header( 'Content-Type: ' . $mime[ $ext ] );
-		header( 'Cache-Control: public, max-age=86400' );
-		readfile( $file );
-		exit;
-	}
+$ext  = strtolower( pathinfo( (string) $uri, PATHINFO_EXTENSION ) );
+$mime = array(
+	'css'   => 'text/css; charset=UTF-8',
+	'js'    => 'application/javascript; charset=UTF-8',
+	'svg'   => 'image/svg+xml',
+	'png'   => 'image/png',
+	'jpg'   => 'image/jpeg',
+	'jpeg'  => 'image/jpeg',
+	'gif'   => 'image/gif',
+	'webp'  => 'image/webp',
+	'ico'   => 'image/x-icon',
+	'woff'  => 'font/woff',
+	'woff2' => 'font/woff2',
+);
+$in_assets = strpos( $uri, '/wp-content/themes/newark-hvac-pros/assets/' ) === 0;
+if ( $in_assets && isset( $mime[ $ext ] ) && is_file( $file ) ) {
+	header( 'Content-Type: ' . $mime[ $ext ] );
+	header( 'Cache-Control: public, max-age=86400' );
+	readfile( $file );
+	exit;
 }
 
 require $root . '/index.php';
