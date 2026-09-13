@@ -1,7 +1,7 @@
 .nhp-chat {
   position: relative;
   z-index: 70;
-  font-family: var(--font-inter), system-ui, sans-serif;
+  font-family: var(--font-sans), "Source Sans 3", system-ui, sans-serif;
   color: var(--ink);
 }
 
@@ -67,7 +67,8 @@
   white-space: nowrap;
   padding-right: 0.15rem;
 }
-.nhp-launcher-dot {
+.nhp-launcher[data-notice="true"]::after {
+  content: "";
   position: absolute;
   top: 8px;
   right: 8px;
@@ -84,7 +85,7 @@
   right: max(1rem, env(safe-area-inset-right));
   bottom: calc(1rem + env(safe-area-inset-bottom) + var(--nhp-kb, 0px));
   z-index: 72;
-  width: min(412px, calc(100vw - 2rem));
+  width: min(412px, calc(100% - 2rem));
   height: min(600px, calc(var(--nhp-vvh, 100dvh) - 2rem));
   max-height: calc(100dvh - 1.25rem);
   background: var(--white);
@@ -261,7 +262,17 @@
 }
 .nhp-form textarea { min-height: 72px; resize: vertical; }
 .nhp-form-err { color: #8a3b3b; font-size: 0.8rem; margin: 0; }
-.nhp-honey { position: absolute; left: -9999px; height: 0; overflow: hidden; }
+.nhp-honey {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
 
 .nhp-compose {
   display: flex;
@@ -337,12 +348,12 @@
     justify-content: center;
   }
   .nhp-launcher-label { display: none; }
-  .nhp-launcher-dot { top: 9px; right: 9px; }
+  .nhp-launcher[data-notice="true"]::after { top: 9px; right: 9px; }
   .nhp-panel {
     left: 0.5rem;
     right: 0.5rem;
     top: 0.5rem;
-    bottom: calc(0.5rem + var(--nhp-kb, 0px));
+    bottom: calc(4.7rem + env(safe-area-inset-bottom) + var(--nhp-kb, 0px));
     width: auto;
     height: auto;
     max-height: none;

@@ -44,7 +44,7 @@ export function PageHero({
           </div>
         </div>
         <div className="hero-photo img-hover reveal reveal-d2">
-          <Image src={image} alt={imageAlt} fill sizes="(max-width: 900px) 100vw, 48vw" priority className="zoom-img" />
+          <Image src={image} alt={imageAlt} fill sizes="(max-width: 900px) 100vw, 48vw" priority fetchPriority="high" className="zoom-img" />
         </div>
       </div>
     </section>
@@ -56,9 +56,7 @@ export function CtaBand({ title, text }: { title: string; text: string }) {
     <section className="cta-band">
       <div className="wrap cta-inner reveal">
         <div>
-          <p className="eyebrow" style={{ color: "#c9c3ba" }}>
-            Newark, Delaware
-          </p>
+          <p className="eyebrow eyebrow-on-dark">Newark, Delaware</p>
           <h2>{title}</h2>
           <p>{text}</p>
         </div>

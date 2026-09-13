@@ -19,12 +19,12 @@ export function ChatLauncher({ open, notice, onOpen, launcherRef }: Props) {
       aria-controls="nhp-chat-panel"
       aria-haspopup="dialog"
       aria-label="How can we help with your HVAC system?"
+      data-notice={notice && !open ? "true" : undefined}
       onClick={onOpen}
     >
       <span className="nhp-launcher-icon" aria-hidden="true">
         N
       </span>
-      {notice && !open ? <span className="nhp-launcher-dot" aria-hidden="true" /> : null}
     </button>
   );
 }

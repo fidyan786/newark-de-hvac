@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { Logo } from "@/components/Logo";
 import { CallLink } from "@/components/CallLink";
+import { SiteLink } from "@/components/SiteLink";
 import { footerServices, locationLinks } from "@/lib/nav";
 import { hasEmail, hasPhone, site } from "@/lib/site";
 
@@ -26,7 +26,7 @@ export function Footer() {
               <a href={`mailto:${site.email}`}>{site.email}</a>
             </p>
           ) : null}
-          <p style={{ marginTop: "1rem" }}>
+          <p className="stack-lg">
             <CallLink className="btn btn-primary" />
           </p>
         </div>
@@ -35,7 +35,7 @@ export function Footer() {
           <ul>
             {footerServices.map((s) => (
               <li key={s.href + s.label}>
-                <Link href={s.href}>{s.label}</Link>
+                <SiteLink href={s.href}>{s.label}</SiteLink>
               </li>
             ))}
           </ul>
@@ -44,11 +44,11 @@ export function Footer() {
           <h2>Service areas</h2>
           <ul>
             <li>
-              <Link href="/service-area/">Newark</Link>
+              <SiteLink href="/service-area/">Newark</SiteLink>
             </li>
             {locationLinks.map((s) => (
               <li key={s.href}>
-                <Link href={s.href}>{s.label}</Link>
+                <SiteLink href={s.href}>{s.label}</SiteLink>
               </li>
             ))}
           </ul>
@@ -57,19 +57,22 @@ export function Footer() {
           <h2>Company</h2>
           <ul>
             <li>
-              <Link href="/about/">About</Link>
+              <SiteLink href="/about/">About</SiteLink>
             </li>
             <li>
-              <Link href="/contact/">Contact</Link>
+              <SiteLink href="/contact/">Contact</SiteLink>
             </li>
             <li>
-              <Link href="/resources/">Resources</Link>
+              <SiteLink href="/contact/#service-request">Request Service</SiteLink>
             </li>
             <li>
-              <Link href="/privacy-policy/">Privacy</Link>
+              <SiteLink href="/resources/">Resources</SiteLink>
             </li>
             <li>
-              <Link href="/terms/">Terms</Link>
+              <SiteLink href="/privacy-policy/">Privacy</SiteLink>
+            </li>
+            <li>
+              <SiteLink href="/terms/">Terms</SiteLink>
             </li>
           </ul>
         </div>

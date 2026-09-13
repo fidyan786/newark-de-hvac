@@ -1,10 +1,14 @@
 import Image from "next/image";
-import { CtaBand } from "@/components/PageHero";
+import { JsonLd } from "@/components/JsonLd";
+import { Breadcrumbs, CtaBand } from "@/components/PageHero";
+import { breadcrumbJsonLd } from "@/lib/schema";
 import { pageMeta } from "@/lib/seo";
+import { PHOTOS } from "@/lib/paths";
 import { site } from "@/lib/site";
+import { absoluteUrl } from "@/lib/site-url";
 
 export const metadata = pageMeta({
-  title: "About Newark HVAC Pros | Newark, Delaware",
+  title: "About Newark HVAC Pros | Newark, DE",
   description:
     "Newark HVAC Pros provides heating and cooling service for Newark, Delaware and nearby New Castle County communities.",
   path: "/about/",
@@ -13,6 +17,22 @@ export const metadata = pageMeta({
 export default function AboutPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", url: absoluteUrl("/", site.siteUrl) },
+          { name: "About", url: absoluteUrl("/about/", site.siteUrl) },
+        ])}
+      />
+      <div className="page-top">
+        <div className="wrap">
+          <Breadcrumbs
+            items={[
+              { href: "/", label: "Home" },
+              { href: "/about/", label: "About" },
+            ]}
+          />
+        </div>
+      </div>
       <section className="page-hero">
         <div className="wrap page-hero-grid">
           <div>
@@ -25,10 +45,11 @@ export default function AboutPage() {
           </div>
           <div className="hero-photo img-hover">
             <Image
-              src="/images/about/house.jpg"
+              src={PHOTOS.house}
               alt="Residential home in a Newark-area neighborhood"
               fill
               sizes="(max-width: 900px) 100vw, 48vw"
+              fetchPriority="high"
               className="zoom-img"
               priority
             />
@@ -36,7 +57,7 @@ export default function AboutPage() {
         </div>
       </section>
       <section className="section">
-        <div className="wrap" style={{ maxWidth: 720 }}>
+        <div className="wrap-prose">
           <h2>The work we do</h2>
           <p>
             Newark housing is a mix of older stock, campus-area rentals, and newer streets toward Glasgow and Bear.

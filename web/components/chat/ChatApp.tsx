@@ -31,27 +31,48 @@ function reduceMotion() {
 export function ChatApp({ boot, initialOpen = false }: { boot: ChatBoot; initialOpen?: boolean }) {
   const pathname = usePathname() || "/";
   const titleId = useId();
-  const engineRef = useRef<ChatEngine | null>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const logRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const launcherRef = useRef<HTMLButtonElement>(null);
   const lastFocus = useRef<HTMLElement | null>(null);
+  const [engine] = useState(() => new ChatEngine({ pageSlug: slugFromPath(pathname), boot }));
 
   const [open, setOpen] = useState(initialOpen);
   const [started, setStarted] = useState(false);
-  const [notice, setNotice] = useState(true);
+  const [notice, setNotice] = useState(!initialOpen);
   const [messages, setMessages] = useState<UiMsg[]>([]);
   const [actions, setActions] = useState<ChatAction[]>([]);
   const [typing, setTyping] = useState(false);
   const [sending, setSending] = useState(false);
   const [input, setInput] = useState("");
   const [formOpen, setFormOpen] = useState(false);
+  const [formDefaults, setFormDefaults] = useState({
+    name: "",
+    phone: "",
+    zip: "",
+    service: "",
+    description: "",
+    page: pathname,
+    intent: "",
+  });
 
-  const engine = useCallback(() => {
-    if (!engineRef.current) engineRef.current = new ChatEngine({ pageSlug: slugFromPath(pathname), boot });
-    return engineRef.current;
-  }, [boot, pathname]);
+  if (open && !started) {
+    setStarted(true);
+    const reply = engine.opening();
+    setMessages([
+      {
+        id: uid(),
+        role: "assistant",
+        text: reply.text,
+        links: reply.links,
+        actions: reply.actions,
+        emergency: reply.emergency,
+        form: reply.showForm,
+      },
+    ]);
+    setActions(reply.actions || []);
+  }
 
   const scrollLog = () => {
     const el = logRef.current;
@@ -59,6 +80,18 @@ export function ChatApp({ boot, initialOpen = false }: { boot: ChatBoot; initial
   };
 
   const pushBot = (reply: EngineReply) => {
+    const snap = engine.snapshot();
+    if (reply.showForm) {
+      setFormDefaults({
+        name: snap.name || "",
+        phone: snap.phone || "",
+        zip: snap.zip || "",
+        service: snap.service || "",
+        description: snap.description || "",
+        page: pathname,
+        intent: snap.intent || "",
+      });
+    }
     setMessages((m) => [
       ...m.map((msg) => ({ ...msg, form: false })),
       {
@@ -79,7 +112,7 @@ export function ChatApp({ boot, initialOpen = false }: { boot: ChatBoot; initial
   const polish = async (userText: string, reply: EngineReply) => {
     if (!boot.aiEnabled) return reply;
     try {
-      const snap = engine().snapshot();
+      const snap = engine.snapshot();
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -104,19 +137,12 @@ export function ChatApp({ boot, initialOpen = false }: { boot: ChatBoot; initial
     return reply;
   };
 
-  const begin = useCallback(() => {
-    if (started) return;
-    setStarted(true);
-    trackChat("chat_started", { page: slugFromPath(pathname) });
-    const reply = engine().opening();
-    pushBot(reply);
-  }, [engine, pathname, started]);
-
   const openChat = () => {
     lastFocus.current = document.activeElement as HTMLElement;
     setOpen(true);
     setNotice(false);
     trackChat("chat_open", { page: slugFromPath(pathname) });
+    trackChat("chat_started", { page: slugFromPath(pathname) });
   };
 
   const closeChat = useCallback(() => {
@@ -130,15 +156,6 @@ export function ChatApp({ boot, initialOpen = false }: { boot: ChatBoot; initial
     }, 30);
     return () => window.clearTimeout(id);
   }, [open, started]);
-
-  useEffect(() => {
-    if (open && !started) begin();
-  }, [open, started, begin]);
-
-  useEffect(() => {
-    if (initialOpen) openChat();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   useEffect(() => {
     scrollLog();
@@ -205,13 +222,13 @@ export function ChatApp({ boot, initialOpen = false }: { boot: ChatBoot; initial
     setSending(true);
     if (userText) {
       setMessages((m) => [...m, { id: uid(), role: "user", text: userText }]);
-      trackChat("message_sent", { intent: engine().snapshot().intent || "UNKNOWN" });
+      trackChat("message_sent", { intent: engine.snapshot().intent || "UNKNOWN" });
     }
     if (actionId) trackChat("intent_selected", { id: actionId });
     setTyping(true);
     const delay = reduceMotion() ? 0 : 240;
     await new Promise((r) => setTimeout(r, delay));
-    let reply = engine().respond(userText, actionId);
+    let reply = engine.respond(userText, actionId);
     reply = await polish(userText || actionId || "", reply);
     setTyping(false);
     pushBot(reply);
@@ -230,12 +247,12 @@ export function ChatApp({ boot, initialOpen = false }: { boot: ChatBoot; initial
   function onAction(action: ChatAction) {
     if (action.kind === "link" && action.href) {
       trackChat("service_page_clicked", { href: action.href });
-      window.location.href = action.href;
+      document.location.assign(action.href);
       return;
     }
     if (action.kind === "call" && action.href) {
       trackChat("call_clicked", { source: "chatbot" });
-      window.location.href = action.href;
+      document.location.assign(action.href);
       return;
     }
     if (action.kind === "request") {
@@ -253,7 +270,6 @@ export function ChatApp({ boot, initialOpen = false }: { boot: ChatBoot; initial
     }
   }
 
-  const snap = engineRef.current?.snapshot();
   const stripActions = actions.filter((action) => !formOpen || action.kind === "call" || action.kind === "link");
 
   return (
@@ -314,15 +330,7 @@ export function ChatApp({ boot, initialOpen = false }: { boot: ChatBoot; initial
               ) : null}
               {msg.form ? (
                 <ChatLeadForm
-                  defaults={{
-                    name: snap?.name || "",
-                    phone: snap?.phone || "",
-                    zip: snap?.zip || "",
-                    service: snap?.service || "",
-                    description: snap?.description || "",
-                    page: pathname,
-                    intent: snap?.intent || "",
-                  }}
+                  defaults={formDefaults}
                   onSuccess={() => {
                     trackChat("request_submitted");
                     setFormOpen(false);
@@ -330,12 +338,12 @@ export function ChatApp({ boot, initialOpen = false }: { boot: ChatBoot; initial
                       ...m.map((msg) => ({ ...msg, form: false })),
                       { id: uid(), role: "assistant", text: "Thanks — your request has been received." },
                     ]);
-                    setActions(engine().respond("", "call_now").actions);
+                    setActions(engine.respond("", "call_now").actions);
                   }}
                   onUnavailable={(message) => {
                     setFormOpen(false);
                     setMessages((m) => [...m, { id: uid(), role: "assistant", text: message }]);
-                    const call = engine().respond("", "call_now");
+                    const call = engine.respond("", "call_now");
                     setActions(call.actions);
                   }}
                   onError={() => {

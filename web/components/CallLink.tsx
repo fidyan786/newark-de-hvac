@@ -1,13 +1,17 @@
+"use client";
+
 import { primaryCta, secondaryCta } from "@/lib/cta";
+import { usePathname } from "next/navigation";
 
 export function CallLink({
-    className = "btn btn-primary",
+  className = "btn btn-primary",
   children,
 }: {
   className?: string;
   children?: React.ReactNode;
 }) {
-  const cta = primaryCta();
+  const pathname = usePathname();
+  const cta = primaryCta(pathname);
   return (
     <a className={className} href={cta.href}>
       {children || cta.label}

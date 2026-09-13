@@ -1,9 +1,12 @@
 import { CallLink } from "@/components/CallLink";
 import { LeadForm } from "@/components/LeadForm";
 import { JsonLd } from "@/components/JsonLd";
-import { breadcrumbJsonLd } from "@/lib/schema";
+import { Breadcrumbs } from "@/components/PageHero";
+import { breadcrumbJsonLd, localBusinessJsonLd } from "@/lib/schema";
 import { pageMeta } from "@/lib/seo";
+import { SERVICE_REQUEST_ID } from "@/lib/cta";
 import { hasEmail, hasPhone, site } from "@/lib/site";
+import { absoluteUrl } from "@/lib/site-url";
 
 export const metadata = pageMeta({
   title: "Contact Newark HVAC Pros | Newark, DE",
@@ -15,14 +18,25 @@ export const metadata = pageMeta({
 export default function ContactPage() {
   return (
     <>
+      <JsonLd data={localBusinessJsonLd()} />
       <JsonLd
         data={breadcrumbJsonLd([
-          { name: "Home", url: `${site.siteUrl}/` },
-          { name: "Contact", url: `${site.siteUrl}/contact/` },
+          { name: "Home", url: absoluteUrl("/", site.siteUrl) },
+          { name: "Contact", url: absoluteUrl("/contact/", site.siteUrl) },
         ])}
       />
+      <div className="page-top">
+        <div className="wrap">
+          <Breadcrumbs
+            items={[
+              { href: "/", label: "Home" },
+              { href: "/contact/", label: "Contact" },
+            ]}
+          />
+        </div>
+      </div>
       <section className="page-hero">
-        <div className="wrap" style={{ maxWidth: 640 }}>
+        <div className="wrap-narrow">
           <p className="eyebrow">Contact</p>
           <h1>Request HVAC service</h1>
           <p className="lede">
@@ -32,8 +46,8 @@ export default function ContactPage() {
             <CallLink>Call for Service</CallLink>
           </div>
           {hasPhone ? (
-            <p style={{ marginTop: "1rem" }}>
-              <a href={`tel:${site.phoneTel}`} style={{ fontSize: "1.5rem", fontWeight: 650 }}>
+            <p>
+              <a className="footer-phone" href={`tel:${site.phoneTel}`}>
                 {site.phoneDisplay}
               </a>
             </p>
@@ -47,8 +61,8 @@ export default function ContactPage() {
           {site.address ? <p>{site.address}</p> : null}
         </div>
       </section>
-      <section className="section paper">
-        <div className="wrap" style={{ maxWidth: 560 }}>
+      <section className="section paper" id={SERVICE_REQUEST_ID}>
+        <div className="wrap-narrow">
           <h2>Service request</h2>
           <LeadForm />
         </div>

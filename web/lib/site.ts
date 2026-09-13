@@ -1,3 +1,5 @@
+import { resolveCanonicalSiteUrl } from "./site-url";
+
 export const site = {
   name: "Newark HVAC Pros",
   legalName: process.env.NEXT_PUBLIC_LEGAL_NAME || "Newark HVAC Pros",
@@ -13,7 +15,7 @@ export const site = {
   state: "Delaware",
   stateCode: "DE",
   county: "New Castle County",
-  siteUrl: (process.env.NEXT_PUBLIC_SITE_URL || "https://newark-de-hvac.vercel.app").replace(/\/$/, ""),
+  siteUrl: resolveCanonicalSiteUrl(),
   zipsPrimary: ["19702", "19711", "19713", "19725"],
   zipsCampus: ["19712", "19714", "19715", "19716", "19717", "19718"],
   zipsNearby: ["19701", "19707", "19720"],
@@ -34,8 +36,10 @@ export const hasPhone = Boolean(site.phoneTel && site.phoneDisplay);
 export const hasEmail = Boolean(site.email);
 export const hasAddress = Boolean(site.address);
 
+export { absoluteUrl } from "./site-url";
+
 export function phoneHref() {
-  return hasPhone ? `tel:${site.phoneTel}` : "/contact/";
+  return hasPhone ? `tel:${site.phoneTel}` : "/contact/#service-request";
 }
 
 export function phoneLabel(fallback = "Request Service") {

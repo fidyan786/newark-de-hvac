@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test:chat": "npx --yes tsx lib/chat/engine.test.ts"
+    "test:chat": "npx --yes tsx lib/chat/engine.test.ts",
+    "test:site-url": "npx --yes tsx lib/site-url.test.ts",
+    "test:seo": "npx --yes tsx lib/site-url.test.ts && npx --yes tsx lib/schema.test.ts && npx --yes tsx lib/sitemap.test.ts"
   },
   "dependencies": {
     "next": "16.3.5",
