@@ -39,7 +39,7 @@ export function PageHero({
           <h1>{title}</h1>
           <p className="lede">{lede}</p>
           <div className="hero-actions">
-            <CallLink />
+            <CallLink>Call for Service</CallLink>
             <SecondaryLink className={emergency ? "btn btn-ghost" : "btn btn-line"} />
           </div>
         </div>
@@ -56,11 +56,13 @@ export function CtaBand({ title, text }: { title: string; text: string }) {
     <section className="cta-band">
       <div className="wrap cta-inner reveal">
         <div>
-          <p className="eyebrow">Need HVAC help?</p>
+          <p className="eyebrow" style={{ color: "#c9c3ba" }}>
+            Newark, Delaware
+          </p>
           <h2>{title}</h2>
           <p>{text}</p>
         </div>
-        <CallLink />
+        <CallLink>Call for Service</CallLink>
       </div>
     </section>
   );

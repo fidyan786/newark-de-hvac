@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { Fraunces, Outfit } from "next/font/google";
+import { Inter, Inter_Tight } from "next/font/google";
 import Script from "next/script";
+import { ChatWidget } from "@/components/ChatWidget";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { JsonLd } from "@/components/JsonLd";
@@ -9,15 +10,15 @@ import { localBusinessJsonLd, websiteJsonLd } from "@/lib/schema";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-const outfit = Outfit({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-outfit",
+  variable: "--font-inter",
   display: "swap",
 });
 
-const fraunces = Fraunces({
+const display = Inter_Tight({
   subsets: ["latin"],
-  variable: "--font-fraunces",
+  variable: "--font-display",
   display: "swap",
 });
 
@@ -28,12 +29,12 @@ export const metadata: Metadata = {
     template: "%s",
   },
   description:
-    "Heating and cooling service for Newark, Delaware and nearby New Castle County communities. Call for AC, furnace, heat pump, and emergency HVAC help.",
+    "Heating and cooling service for Newark, Delaware and nearby New Castle County. AC repair, furnace service, heat pumps, and commercial HVAC.",
   openGraph: {
     siteName: site.name,
     locale: "en_US",
     type: "website",
-    images: [{ url: "/images/hero/suburban-home.jpg", width: 1600, height: 1066 }],
+    images: [{ url: "/images/hero/service.jpg", width: 1600, height: 1066 }],
   },
   twitter: { card: "summary_large_image" },
   robots: { index: true, follow: true },
@@ -41,8 +42,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${outfit.variable} ${fraunces.variable}`}>
-      <body className={outfit.className}>
+    <html lang="en" className={`${inter.variable} ${display.variable}`}>
+      <body className={inter.className}>
         <a className="skip" href="#main">
           Skip to content
         </a>
@@ -50,6 +51,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <main id="main">{children}</main>
         <Footer />
         <MobileCallBar />
+        <ChatWidget />
         <JsonLd data={localBusinessJsonLd()} />
         <JsonLd data={websiteJsonLd()} />
         {site.ga4 ? (

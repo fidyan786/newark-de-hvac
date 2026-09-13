@@ -8,7 +8,7 @@ import { hasEmail, hasPhone, site } from "@/lib/site";
 export const metadata = pageMeta({
   title: "Contact Newark HVAC Pros | Newark, DE",
   description:
-    "Contact Newark HVAC Pros for heating and cooling service in Newark, Delaware. Call or send a short service request with your ZIP and the problem.",
+    "Contact Newark HVAC Pros for heating and cooling in Newark, Delaware. Call or send a short service request.",
   path: "/contact/",
 });
 
@@ -22,25 +22,22 @@ export default function ContactPage() {
         ])}
       />
       <section className="page-hero">
-        <div className="wrap" style={{ maxWidth: 720 }}>
+        <div className="wrap" style={{ maxWidth: 640 }}>
           <p className="eyebrow">Contact</p>
-          <h1>Call for HVAC service in Newark, DE</h1>
+          <h1>Request HVAC service</h1>
           <p className="lede">
-            Phone first. The form is four fields if you cannot call right now. You do not need a ten-field questionnaire
-            to say the AC stopped.
+            Share your ZIP and what the system is doing. We will take the next step from there.
           </p>
           <div className="hero-actions">
-            <CallLink />
+            <CallLink>Call for Service</CallLink>
           </div>
           {hasPhone ? (
             <p style={{ marginTop: "1rem" }}>
-              <a href={`tel:${site.phoneTel}`} style={{ fontSize: "1.6rem", fontWeight: 800, color: "var(--navy)" }}>
+              <a href={`tel:${site.phoneTel}`} style={{ fontSize: "1.5rem", fontWeight: 650 }}>
                 {site.phoneDisplay}
               </a>
             </p>
-          ) : (
-            <p className="muted">A public call-tracking number will appear here once it is assigned.</p>
-          )}
+          ) : null}
           {hasEmail ? (
             <p>
               <a href={`mailto:${site.email}`}>{site.email}</a>
@@ -50,9 +47,9 @@ export default function ContactPage() {
           {site.address ? <p>{site.address}</p> : null}
         </div>
       </section>
-      <section className="section mist">
+      <section className="section paper">
         <div className="wrap" style={{ maxWidth: 560 }}>
-          <h2>Request service</h2>
+          <h2>Service request</h2>
           <LeadForm />
         </div>
       </section>

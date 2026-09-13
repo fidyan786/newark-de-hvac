@@ -5,10 +5,12 @@ export function pageMeta({
   title,
   description,
   path,
+  index = true,
 }: {
   title: string;
   description: string;
   path: string;
+  index?: boolean;
 }): Metadata {
   const url = path === "/" ? `${site.siteUrl}/` : `${site.siteUrl}${path.startsWith("/") ? path : `/${path}`}`;
   const canonical = url.endsWith("/") ? url : `${url}/`;
@@ -29,6 +31,6 @@ export function pageMeta({
       title,
       description,
     },
-    robots: { index: true, follow: true },
+    robots: { index, follow: true },
   };
 }

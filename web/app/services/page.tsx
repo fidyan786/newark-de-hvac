@@ -3,12 +3,12 @@ import Link from "next/link";
 import { CtaBand } from "@/components/PageHero";
 import { CallLink } from "@/components/CallLink";
 import { pageMeta } from "@/lib/seo";
-import { services } from "@/lib/services";
+import { serviceCategories } from "@/lib/nav";
 
 export const metadata = pageMeta({
   title: "HVAC Services in Newark, DE | Heating & Cooling",
   description:
-    "Full HVAC service list for Newark, Delaware: AC repair, furnace repair, heat pumps, maintenance, ductless, indoor air quality, and commercial HVAC.",
+    "HVAC services in Newark, Delaware: AC repair and installation, furnace service, heat pumps, indoor air quality, and commercial HVAC.",
   path: "/services/",
 });
 
@@ -16,35 +16,42 @@ export default function ServicesHub() {
   return (
     <>
       <section className="page-hero">
-        <div className="wrap">
+        <div className="wrap" style={{ maxWidth: 720 }}>
           <p className="eyebrow">Newark, Delaware</p>
           <h1>HVAC services</h1>
           <p className="lede">
-            Choose the job that matches the problem. Every page is written for Newark and nearby New Castle County homes
-            — not a national template with the city name swapped in.
+            Cooling, heating, heat pumps, indoor air, and light commercial work — organized the way homeowners actually
+            look for help.
           </p>
           <div className="hero-actions">
-            <CallLink />
+            <CallLink>Call for Service</CallLink>
           </div>
         </div>
       </section>
       <section className="section">
-        <div className="wrap svc-grid">
-          {services.map((s) => (
-            <article className="card svc-card" key={s.slug}>
-              <div className="thumb">
-                <Image src={s.image} alt={s.imageAlt} fill sizes="(max-width: 700px) 100vw, 33vw" className="zoom-img" />
+        <div className="wrap">
+          {serviceCategories.map((cat, i) => (
+            <article className={`ed-row${i % 2 ? " flip" : ""}`} key={cat.id}>
+              <div className="ed-photo img-hover">
+                <Image src={cat.image} alt={cat.imageAlt} fill sizes="(max-width: 900px) 100vw, 46vw" className="zoom-img" />
               </div>
-              <div className="body">
-                <h2 style={{ fontSize: "1.2rem" }}>{s.h1.replace(" in Newark, DE", "")}</h2>
-                <p>{s.lede.slice(0, 110)}…</p>
-                <Link href={`/${s.slug}/`}>Learn more</Link>
+              <div className="ed-copy">
+                <p className="eyebrow">{cat.label}</p>
+                <h2>{cat.title}</h2>
+                <p className="muted">{cat.text}</p>
+                <div className="ed-links">
+                  {cat.links.map((l) => (
+                    <Link key={l.href + l.label} href={l.href}>
+                      {l.label}
+                    </Link>
+                  ))}
+                </div>
               </div>
             </article>
           ))}
         </div>
       </section>
-      <CtaBand title="Not sure which service you need?" text="Describe the symptom. We will point you to the right visit." />
+      <CtaBand title="Not sure which service you need?" text="Describe the symptom. We’ll point you to the right visit." />
     </>
   );
 }

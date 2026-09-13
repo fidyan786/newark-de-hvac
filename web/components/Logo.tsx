@@ -1,20 +1,24 @@
 import Link from "next/link";
 import { site } from "@/lib/site";
 
-export function Logo({ light = false }: { light?: boolean }) {
+type Tone = "light" | "dark" | "mono";
+
+export function Logo({ tone = "light" }: { tone?: Tone }) {
+  const onDark = tone === "dark";
+  const ink = tone === "mono" ? "currentColor" : onDark ? "#F6F4F1" : "#161616";
+  const mark = tone === "mono" ? "currentColor" : onDark ? "#F6F4F1" : "#2F4A63";
+
   return (
-    <Link href="/" className="logo" aria-label={`${site.name} home`}>
+    <Link href="/" className={`logo tone-${tone}`} aria-label={`${site.name} home`}>
       <span className="logo-mark" aria-hidden="true">
-        <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
-          <rect width="32" height="32" rx="8" fill={light ? "#E8A23A" : "#C97812"} />
-          <path d="M8 18c4-8 12-8 16 0" stroke={light ? "#0B1F3A" : "#0B1F3A"} strokeWidth="2" strokeLinecap="round" />
-          <path d="M10 22h12" stroke={light ? "#0B1F3A" : "#0B1F3A"} strokeWidth="2" strokeLinecap="round" />
-          <circle cx="16" cy="12" r="2.2" fill={light ? "#0B1F3A" : "#0B1F3A"} />
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <rect x="1.5" y="1.5" width="29" height="29" rx="2" stroke={mark} strokeWidth="1.5" />
+          <path d="M9 22V10h3.2l5.2 7.4V10H21v12h-3.1L12.6 14.4V22H9Z" fill={ink} />
         </svg>
       </span>
       <span className="logo-text">
-        <strong>{site.name}</strong>
-        <em>Newark, Delaware</em>
+        <strong>Newark</strong>
+        <em>HVAC Pros</em>
       </span>
     </Link>
   );

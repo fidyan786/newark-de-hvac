@@ -1,5 +1,4 @@
 import { pageMeta } from "@/lib/seo";
-import { site } from "@/lib/site";
 
 export const metadata = pageMeta({
   title: "Terms of Use | Newark HVAC Pros",
@@ -14,13 +13,12 @@ export default function TermsPage() {
         <h1>Terms of use</h1>
         <p>
           This website describes heating and cooling services for Newark, Delaware. Content is informational. It is not
-          a bid, a license, or a guarantee of dispatch time.
+          a bid or a guarantee of dispatch time.
         </p>
         <p>
-          Requesting service does not create a contract until the operating contractor confirms the visit. Safety
-          guidance on this site is general: gas odors and carbon monoxide alarms are emergency-utility / 911 situations.
+          Requesting service does not create a contract until the visit is confirmed. Gas odors and carbon monoxide
+          alarms are utility / 911 situations.
         </p>
-        <p>{site.legalName} may update these terms as the operating business details are completed.</p>
       </div>
     </section>
   );

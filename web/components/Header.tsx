@@ -4,21 +4,7 @@ import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
 import { CallLink } from "@/components/CallLink";
 import { Logo } from "@/components/Logo";
-import { primaryCta } from "@/lib/cta";
-import { serviceGroups } from "@/lib/nav";
-import { hasPhone, site } from "@/lib/site";
-
-const barLinks = [
-  { href: "/emergency-hvac-newark-de/", label: "Emergency HVAC", extra: false },
-  { href: "/furnace-repair-newark-de/", label: "Heating", extra: true },
-  { href: "/ac-repair-newark-de/", label: "Cooling", extra: true },
-  { href: "/heat-pump-repair-newark-de/", label: "Heat Pumps", extra: true },
-  { href: "/hvac-maintenance-newark-de/", label: "Maintenance", extra: true },
-  { href: "/commercial-hvac-newark-de/", label: "Commercial", extra: true },
-  { href: "/service-area/", label: "Service Areas", extra: false },
-  { href: "/about/", label: "About", extra: false },
-  { href: "/contact/", label: "Contact", extra: false },
-];
+import { centerNav, serviceGroups } from "@/lib/nav";
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -27,7 +13,6 @@ export function Header() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const btnId = useId();
   const panelId = useId();
-  const cta = primaryCta();
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
@@ -63,7 +48,7 @@ export function Header() {
   return (
     <header className="site-header">
       <div className="wrap header-inner" ref={wrapRef}>
-        <Logo light />
+        <Logo tone="light" />
 
         <nav className="desktop-nav" aria-label="Primary">
           <div
@@ -85,15 +70,8 @@ export function Header() {
                 }
                 setServicesOpen((v) => !v);
               }}
-              onKeyDown={(e) => {
-                if (e.key === "ArrowDown") {
-                  e.preventDefault();
-                  setServicesOpen(true);
-                }
-              }}
             >
               Services
-              <span aria-hidden="true">▾</span>
             </button>
             <div id={panelId} className="mega" role="region" aria-labelledby={btnId}>
               {serviceGroups.map((group) => (
@@ -101,30 +79,39 @@ export function Header() {
                   <p className="mega-label">{group.label}</p>
                   <ul>
                     {group.items.map((item) => (
-                      <li key={item.href}>
+                      <li key={`${group.id}-${item.label}`}>
                         <Link href={item.href} onClick={closeAll}>
-                          <strong>{item.label}</strong>
-                          <span>{item.hint}</span>
+                          {item.label}
                         </Link>
                       </li>
                     ))}
                   </ul>
                 </div>
               ))}
+              <div className="mega-col">
+                <p className="mega-label">Emergency</p>
+                <ul>
+                  <li>
+                    <Link href="/emergency-hvac-newark-de/" onClick={closeAll}>
+                      Emergency HVAC
+                    </Link>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
-
-          {barLinks.map((item) => (
-            <Link key={item.href} href={item.href} className={`nav-link${item.extra ? " nav-extra" : ""}`}>
+          {centerNav.map((item) => (
+            <Link key={item.href} href={item.href} className="nav-link">
               {item.label}
             </Link>
           ))}
         </nav>
 
         <div className="header-actions">
-          <CallLink className="btn btn-call header-call">
-            {hasPhone ? `Call ${site.phoneDisplay}` : cta.label}
-          </CallLink>
+          <CallLink className="btn btn-primary header-call">Call for Service</CallLink>
+          <Link href="/contact/" className="btn btn-line header-req">
+            Request Service
+          </Link>
           <button
             type="button"
             className="menu-toggle"
@@ -137,12 +124,11 @@ export function Header() {
         </div>
       </div>
 
-      <div id="mobile-drawer" className={`mobile-drawer${menuOpen ? " open" : ""}`} hidden={!menuOpen} inert={!menuOpen || undefined}>
+      <div id="mobile-drawer" className="mobile-drawer" hidden={!menuOpen} inert={!menuOpen || undefined}>
         <nav aria-label="Mobile">
-          <Link href="/emergency-hvac-newark-de/" className="mobile-link emergency" onClick={closeAll}>
+          <Link href="/emergency-hvac-newark-de/" className="mobile-link" onClick={closeAll}>
             Emergency HVAC
           </Link>
-
           <p className="mobile-kicker">Services</p>
           {serviceGroups.map((group) => (
             <div className="mobile-accordion" key={group.id}>
@@ -157,7 +143,7 @@ export function Header() {
               </button>
               <ul className="acc-body" hidden={openCat !== group.id}>
                 {group.items.map((item) => (
-                  <li key={item.href}>
+                  <li key={`${group.id}-${item.label}`}>
                     <Link href={item.href} onClick={closeAll}>
                       {item.label}
                     </Link>
@@ -166,17 +152,15 @@ export function Header() {
               </ul>
             </div>
           ))}
-
-          <Link href="/service-area/" className="mobile-link" onClick={closeAll}>
-            Service Areas
-          </Link>
-          <Link href="/about/" className="mobile-link" onClick={closeAll}>
-            About
-          </Link>
+          {centerNav.map((item) => (
+            <Link key={item.href} href={item.href} className="mobile-link" onClick={closeAll}>
+              {item.label}
+            </Link>
+          ))}
           <Link href="/contact/" className="mobile-link" onClick={closeAll}>
             Contact
           </Link>
-          <CallLink className="btn btn-call drawer-cta" />
+          <CallLink className="btn btn-primary drawer-cta" />
         </nav>
       </div>
     </header>

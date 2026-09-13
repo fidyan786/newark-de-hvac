@@ -28,8 +28,8 @@ export const services: ServiceContent[] = [
     h1: "Emergency HVAC in Newark, DE",
     eyebrow: "Urgent heating & cooling",
     lede: "When a Newark home loses heat on a January night or cooling in a humid July stretch, the next step is a phone call — not a long form. Tell us the ZIP and the symptom. We will help you decide what to do next.",
-    image: "/images/furnace/mechanical-room.jpg",
-    imageAlt: "Residential mechanical room with heating equipment",
+    image: "/images/hero/service.jpg",
+    imageAlt: "HVAC technician checking refrigerant lines on outdoor equipment",
     problems: [
       "No heat when outdoor temperatures drop",
       "No air conditioning during a heat and humidity spike",
@@ -61,7 +61,7 @@ export const services: ServiceContent[] = [
     faqs: [
       {
         q: "Is this a 24-hour dispatch line?",
-        a: "After-hours coverage is published here only when it is confirmed for the operating contractor. Until then, call or request service and we will tell you the next available window.",
+        a: "Call or request service and we will tell you the next available window. After-hours coverage is listed here only when it is confirmed.",
       },
       {
         q: "What should I do while I wait?",
@@ -87,7 +87,7 @@ export const services: ServiceContent[] = [
     eyebrow: "Cooling service",
     lede: "Central air that runs but will not drop the temperature is a classic Newark summer call. Humidity along the Christina River and around campus makes a weak condenser feel like a total failure.",
     image: "/images/ac/outdoor-unit.jpg",
-    imageAlt: "Outdoor air conditioning condenser mounted on a residential wall",
+    imageAlt: "Outdoor heat-pump and air-conditioning units at a residence",
     problems: [
       "AC blowing warm air on a humid afternoon",
       "Outdoor unit silent, humming, or clicking",
@@ -145,7 +145,7 @@ export const services: ServiceContent[] = [
     eyebrow: "New cooling systems",
     lede: "A replacement condenser is not a catalog pick. Newark homes need equipment matched to humidity, ductwork, and how the house is actually used — including student rentals and 1970s ranches.",
     image: "/images/ac/condenser-close.jpg",
-    imageAlt: "Close-up of a residential air conditioning condenser on a sunny day",
+    imageAlt: "Technician checking condenser coils on outdoor HVAC equipment",
     problems: [
       "Repair quotes stacking up on an aging outdoor unit",
       "Rooms that never catch up on humid afternoons",
@@ -196,7 +196,7 @@ export const services: ServiceContent[] = [
     eyebrow: "Heating service",
     lede: "January nights in Newark are cold enough that a furnace that will not ignite is not a wait-until-Monday inconvenience. Gas and oil systems are both common on older streets.",
     image: "/images/furnace/mechanical-room.jpg",
-    imageAlt: "Mechanical room equipment typical of a residential heating plant",
+    imageAlt: "Electrical panel inspection during a heating-system diagnosis",
     problems: [
       "No heat, or heat that dies after a few minutes",
       "Furnace blower running with no flame",
@@ -248,7 +248,7 @@ export const services: ServiceContent[] = [
     eyebrow: "New heating systems",
     lede: "A new furnace should match the house: duct size, chimney or PVC venting, and how cold a Newark January actually gets — not the largest cabinet that fits the closet.",
     image: "/images/furnace/industrial-pipes.jpg",
-    imageAlt: "Mechanical piping and equipment associated with heating systems",
+    imageAlt: "Commercial interior with exposed heating and cooling ducts",
     problems: [
       "Repeated no-heat repairs on the same furnace",
       "A cracked heat exchanger concern",
@@ -295,7 +295,7 @@ export const services: ServiceContent[] = [
     eyebrow: "Dual-mode systems",
     lede: "A heat pump that only works in one season is a Newark shoulder-month classic. Reversing valves, defrost boards, and backup heat strips fail just as the weather changes.",
     image: "/images/heat-pump/install.jpg",
-    imageAlt: "Technician on a residential job site working with outdoor equipment",
+    imageAlt: "Outdoor heat pump units installed beside a residence",
     problems: [
       "Cools in summer, will not heat in fall",
       "Outdoor unit ices heavily and never defrosts",
@@ -342,7 +342,7 @@ export const services: ServiceContent[] = [
     eyebrow: "Year-round comfort",
     lede: "A heat pump can be the right Newark system when ducts, electrical, and expectations are honest. It is not a magic swap for every oil furnace in a 1970s ranch.",
     image: "/images/heat-pump/outdoor.jpg",
-    imageAlt: "Outdoor heat pump unit installed beside a residence",
+    imageAlt: "Outdoor heat pump units along a residential wall",
     problems: [
       "Replacing an aging AC and considering heat at the same time",
       "An addition that needs its own heating and cooling",
@@ -434,7 +434,7 @@ export const services: ServiceContent[] = [
     eyebrow: "Seasonal checkups",
     lede: "Maintenance is not a magic shield. It is a chance to catch a weak capacitor, a dirty flame sensor, or a clogged drain before the first 90-degree afternoon or the first freeze.",
     image: "/images/maintenance/tools.jpg",
-    imageAlt: "Service tools used during HVAC maintenance visits",
+    imageAlt: "Electrical work during an HVAC maintenance visit",
     problems: [
       "The system has not been opened since the last emergency call",
       "Filters have been ignored through a UD rental turnover",
@@ -478,7 +478,7 @@ export const services: ServiceContent[] = [
     eyebrow: "Room-by-room comfort",
     lede: "Mini splits solve rooms that central air gave up on: sunrooms, finished attics, campus conversions, and additions on tight Newark lots.",
     image: "/images/ductless/indoor.jpg",
-    imageAlt: "Indoor comfort equipment typical of a ductless living space",
+    imageAlt: "Finished living room served by a central air system",
     problems: [
       "One room that never matches the rest of the house",
       "An addition with no duct chase",
@@ -522,7 +522,7 @@ export const services: ServiceContent[] = [
     eyebrow: "Air you actually live in",
     lede: "Sticky summers and tight winter houses both make indoor air worse. IAQ work here is about filtration, humidity, and ventilation — not a miracle cartridge.",
     image: "/images/iaq/vents.jpg",
-    imageAlt: "Ceiling ventilation grille in a finished interior",
+    imageAlt: "Residential kitchen with a ceiling supply vent",
     problems: [
       "Dust that returns a day after cleaning",
       "Musty air at the start of cooling season",
@@ -567,7 +567,7 @@ export const services: ServiceContent[] = [
     eyebrow: "Ducts & airflow",
     lede: "Duct cleaning is not an annual ritual. It is useful after renovation dust, pest issues, or when returns are packed. It is not a substitute for repairing a leaking trunk.",
     image: "/images/iaq/ducts.jpg",
-    imageAlt: "Residential ductwork used for heating and cooling airflow",
+    imageAlt: "Exposed ductwork in a commercial interior",
     problems: [
       "Visible dust blowing from supplies after construction",
       "Odors that clearly come from the return",
@@ -610,7 +610,7 @@ export const services: ServiceContent[] = [
     eyebrow: "Light commercial",
     lede: "Main Street suites, Christiana-area retail, and multi-unit rentals near campus need HVAC that shows up. This is light commercial and rental work — not a promise to run a hospital campus.",
     image: "/images/commercial/building.jpg",
-    imageAlt: "Commercial building exterior typical of office and retail HVAC work",
+    imageAlt: "Light-commercial interior with exposed HVAC ductwork",
     problems: [
       "A rooftop or split system down during business hours",
       "A rental building with stacked after-hours complaints",

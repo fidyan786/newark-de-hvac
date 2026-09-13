@@ -62,7 +62,7 @@ function ServicePage({ slug }: { slug: string }) {
             ]}
           />
           {emergency ? (
-            <div className="card" style={{ padding: "1.2rem 1.3rem", marginBottom: "2rem", borderColor: "#e8c48a" }}>
+            <div className="notice">
               <h2 style={{ marginTop: 0 }}>Gas or carbon monoxide</h2>
               <p className="muted" style={{ margin: 0 }}>
                 If you smell gas or a CO alarm is sounding, leave the building and contact the utility or 911. Do not
@@ -102,8 +102,8 @@ function ServicePage({ slug }: { slug: string }) {
       <section className="section">
         <div className="wrap split">
           <div>
-            <p className="eyebrow">Why a professional</p>
-            <h2>Why this is not a weekend experiment</h2>
+            <p className="eyebrow">Our approach</p>
+            <h2>How we handle the work</h2>
             <p>{s.why}</p>
             <p>{s.local}</p>
           </div>
@@ -119,8 +119,9 @@ function ServicePage({ slug }: { slug: string }) {
             <h2>After you call</h2>
           </div>
           <div className="process-grid">
-            {s.process.map((step) => (
+            {s.process.map((step, i) => (
               <article className="process-card" key={step.title}>
+                <span className="process-num">{String(i + 1).padStart(2, "0")}</span>
                 <h3>{step.title}</h3>
                 <p>{step.text}</p>
               </article>
@@ -132,11 +133,11 @@ function ServicePage({ slug }: { slug: string }) {
         <div className="wrap">
           <div className="section-head">
             <p className="eyebrow">Related</p>
-            <h2>Other HVAC pages</h2>
+            <h2>Related services</h2>
           </div>
           <div className="problem-grid">
             {s.related.map((r) => (
-              <Link className="problem-card card" href={r.href} key={r.href}>
+              <Link className="problem-card" href={r.href} key={r.href}>
                 <h3>{r.label}</h3>
                 <p>{r.text}</p>
               </Link>

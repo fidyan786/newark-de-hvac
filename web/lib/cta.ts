@@ -2,13 +2,11 @@ import { hasPhone, phoneHref, site } from "./site";
 
 export function primaryCta() {
   if (hasPhone) {
-    return { href: phoneHref(), label: "Call Now", detail: site.phoneDisplay };
+    return { href: phoneHref(), label: "Call for Service", detail: site.phoneDisplay };
   }
-  return { href: "/contact/", label: "Request Service", detail: "Share the ZIP and the problem" };
+  return { href: "/contact/", label: "Call for Service", detail: "Newark & New Castle County" };
 }
 
 export function secondaryCta() {
-  return hasPhone
-    ? { href: "/contact/", label: "Request Service" }
-    : { href: "/services/", label: "View Services" };
+  return { href: "/services/", label: "Explore HVAC Services" };
 }

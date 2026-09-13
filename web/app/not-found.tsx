@@ -4,14 +4,12 @@ import { CallLink } from "@/components/CallLink";
 export default function NotFound() {
   return (
     <section className="section">
-      <div className="wrap" style={{ maxWidth: 640 }}>
+      <div className="wrap" style={{ maxWidth: 560 }}>
         <p className="eyebrow">404</p>
-        <h1>That page is not here</h1>
-        <p className="lede">
-          The link may be from an older cost-guide URL. HVAC service pages for Newark, DE still live under Services.
-        </p>
+        <h1>Page not found</h1>
+        <p className="lede">The page may have moved. HVAC services for Newark, Delaware are listed under Services.</p>
         <div className="hero-actions">
-          <CallLink />
+          <CallLink>Call for Service</CallLink>
           <Link className="btn btn-line" href="/">
             Home
           </Link>

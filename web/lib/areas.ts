@@ -44,8 +44,8 @@ export const areas: AreaPage[] = [
       "HVAC service for Pike Creek, Delaware — 19711-area homes, wooded lots, and dual-system houses near Newark.",
     h1: "HVAC Service in Pike Creek, DE",
     lede: "Pike Creek sits a few miles from downtown Newark, mostly in the 19711 ZIP. Owner-occupied split-levels, finished basements, and tree-shaded condensers change how jobs are diagnosed.",
-    image: "/images/local/colonial.jpg",
-    imageAlt: "Wooded suburban home similar to Pike Creek, Delaware lots",
+    image: "/images/local/ranch.jpg",
+    imageAlt: "Suburban home similar to Pike Creek, Delaware lots",
     zip: "19711",
     body: [
       {

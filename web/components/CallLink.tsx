@@ -1,7 +1,7 @@
 import { primaryCta, secondaryCta } from "@/lib/cta";
 
 export function CallLink({
-  className = "btn btn-call",
+    className = "btn btn-primary",
   children,
 }: {
   className?: string;

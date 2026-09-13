@@ -9,25 +9,32 @@ export function Footer() {
     <footer className="site-footer">
       <div className="wrap footer-grid">
         <div>
-          <Logo light />
-          <p className="footer-tag">{site.tagline}</p>
+          <Logo tone="dark" />
+          <p className="footer-tag">
+            Heating and cooling service for homes and light commercial buildings in Newark, Delaware and nearby New
+            Castle County communities.
+          </p>
           {hasPhone ? (
             <p>
               <a className="footer-phone" href={`tel:${site.phoneTel}`}>
                 {site.phoneDisplay}
               </a>
             </p>
-          ) : (
-            <p className="muted">Call tracking number posts here once assigned.</p>
-          )}
-          {hasEmail ? <p><a href={`mailto:${site.email}`}>{site.email}</a></p> : null}
-          <CallLink className="btn btn-call" />
+          ) : null}
+          {hasEmail ? (
+            <p>
+              <a href={`mailto:${site.email}`}>{site.email}</a>
+            </p>
+          ) : null}
+          <p style={{ marginTop: "1rem" }}>
+            <CallLink className="btn btn-primary" />
+          </p>
         </div>
         <div>
           <h2>Services</h2>
           <ul>
             {footerServices.map((s) => (
-              <li key={s.href}>
+              <li key={s.href + s.label}>
                 <Link href={s.href}>{s.label}</Link>
               </li>
             ))}
@@ -37,7 +44,7 @@ export function Footer() {
           <h2>Service areas</h2>
           <ul>
             <li>
-              <Link href="/service-area/">Newark, DE</Link>
+              <Link href="/service-area/">Newark</Link>
             </li>
             {locationLinks.map((s) => (
               <li key={s.href}>
@@ -56,7 +63,7 @@ export function Footer() {
               <Link href="/contact/">Contact</Link>
             </li>
             <li>
-              <Link href="/reviews/">Reviews</Link>
+              <Link href="/resources/">Resources</Link>
             </li>
             <li>
               <Link href="/privacy-policy/">Privacy</Link>
@@ -69,8 +76,7 @@ export function Footer() {
       </div>
       <div className="wrap footer-bottom">
         <p>
-          © {new Date().getFullYear()} {site.legalName}. Heating and cooling service for Newark, Delaware and nearby New
-          Castle County communities.
+          © {new Date().getFullYear()} {site.legalName}
         </p>
       </div>
     </footer>

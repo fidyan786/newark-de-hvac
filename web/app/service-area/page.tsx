@@ -10,7 +10,7 @@ import { site } from "@/lib/site";
 export const metadata = pageMeta({
   title: "HVAC Service Area | Newark, DE & New Castle County",
   description:
-    "Newark HVAC Pros covers Newark, Delaware ZIPs 19702, 19711, 19713, 19725 and nearby Bear, Pike Creek, Glasgow, Hockessin, Christiana, and New Castle.",
+    "Newark HVAC Pros serves Newark, Delaware and nearby Bear, Pike Creek, Glasgow, Hockessin, Christiana, and New Castle.",
   path: "/service-area/",
 });
 
@@ -27,10 +27,9 @@ export default function ServiceAreaPage() {
         <div className="wrap page-hero-grid">
           <div>
             <p className="eyebrow">New Castle County</p>
-            <h1>HVAC service area: Newark, DE</h1>
+            <h1>HVAC service in Newark, Delaware</h1>
             <p className="lede">
-              Newark is the home base. Nearby communities are on the same dispatch map. Tell us the ZIP when you call —
-              19711 near campus is not the same routing conversation as 19701 in Bear.
+              Newark is the home base. Nearby communities are on the same service map. Tell us the ZIP when you call.
             </p>
           </div>
           <div className="hero-photo img-hover">
@@ -47,26 +46,18 @@ export default function ServiceAreaPage() {
       </section>
       <section className="section">
         <div className="wrap">
-          <h2>Primary ZIPs</h2>
-          <p>{site.zipsPrimary.join(" · ")}</p>
-          <h2>Campus / university ZIPs</h2>
-          <p>{site.zipsCampus.join(" · ")}</p>
-          <h2>Nearby ZIPs</h2>
-          <p>{site.zipsNearby.join(" · ")}</p>
-          <div className="area-grid" style={{ marginTop: "2rem" }}>
+          <h2>Communities</h2>
+          <div className="problem-grid" style={{ marginTop: "1.5rem" }}>
             {areas.map((a) => (
-              <article className="card area-card" key={a.slug}>
-                <div className="thumb">
-                  <Image src={a.image} alt={a.imageAlt} fill sizes="50vw" className="zoom-img" />
-                </div>
-                <div className="body">
-                  <h3>{a.h1.replace("HVAC Service in ", "")}</h3>
-                  <p>ZIP {a.zip}</p>
-                  <Link href={`/${a.slug}/`}>Local HVAC page</Link>
-                </div>
-              </article>
+              <Link className="problem-card" href={`/${a.slug}/`} key={a.slug}>
+                <h3>{a.h1.replace("HVAC Service in ", "")}</h3>
+                <p>ZIP {a.zip}</p>
+              </Link>
             ))}
           </div>
+          <p className="muted" style={{ marginTop: "2rem" }}>
+            Primary ZIPs {site.zipsPrimary.join(", ")}. Nearby {site.zipsNearby.join(", ")}.
+          </p>
         </div>
       </section>
       <CtaBand title="Serving Newark and nearby towns" text="If you are in New Castle County and the system failed, start with a call." />
