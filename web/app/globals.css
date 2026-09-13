@@ -373,7 +373,9 @@ img { max-width: 100%; height: auto; }
   margin-bottom: 0.4rem;
 }
 
-.page-hero { padding: 2.2rem 0 2.8rem; background: var(--mist); }
+.page-hero h1 {
+  font-size: clamp(2.05rem, 4.2vw, 3.15rem);
+}
 .page-hero.emergency {
   background: linear-gradient(165deg, #3b1010 0%, #0b1f3a 55%);
   color: white;

@@ -387,8 +387,8 @@ export const services: ServiceContent[] = [
     h1: "HVAC Replacement in Newark, DE",
     eyebrow: "Complete systems",
     lede: "When the furnace and the air conditioner are both tired, replacing them as a pair is often cleaner than stacking one more repair on each.",
-    image: "/images/services/technician.jpg",
-    imageAlt: "Technician on a residential mechanical service call",
+    image: "/images/heat-pump/install.jpg",
+    imageAlt: "Outdoor HVAC equipment installed at a residence",
     problems: [
       "Both heat and cool have failed in the same year",
       "Mismatched indoor and outdoor equipment",

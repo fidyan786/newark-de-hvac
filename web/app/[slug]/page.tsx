@@ -150,7 +150,7 @@ function ServicePage({ slug }: { slug: string }) {
           <FaqList items={s.faqs} />
         </div>
       </section>
-      <CtaBand title={`Need ${s.h1.replace(" in Newark, DE", "").toLowerCase()} in Newark?`} text="Call or request service with the ZIP and the symptom." />
+      <CtaBand title={`Need ${s.h1.replace(" in Newark, DE", "")} in Newark?`} text="Call or request service with the ZIP and the symptom." />
     </>
   );
 }

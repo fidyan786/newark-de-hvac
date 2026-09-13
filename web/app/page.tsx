@@ -134,8 +134,8 @@ export default function HomePage() {
           </div>
           <div className="split-photo img-hover reveal reveal-d2">
             <Image
-              src="/images/services/technician.jpg"
-              alt="HVAC technician servicing residential heating and cooling equipment"
+              src="/images/furnace/mechanical-room.jpg"
+              alt="Mechanical room with heating and cooling equipment"
               fill
               sizes="(max-width: 900px) 100vw, 46vw"
               className="zoom-img"
