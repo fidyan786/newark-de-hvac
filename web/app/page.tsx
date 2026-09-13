@@ -79,8 +79,8 @@ export default function HomePage() {
           </div>
           <div className="hero-photo img-hover reveal reveal-d2">
             <Image
-              src="/images/hero/service.jpg"
-              alt="HVAC technician inspecting an outdoor air conditioning unit"
+              src="/images/ac/outdoor-unit.jpg"
+              alt="Outdoor air conditioning condenser at a residence"
               fill
               sizes="(max-width: 900px) 100vw, 48vw"
               priority
@@ -134,8 +134,8 @@ export default function HomePage() {
           </div>
           <div className="split-photo img-hover reveal reveal-d2">
             <Image
-              src="/images/emergency/technician-work.jpg"
-              alt="Technician working on mechanical HVAC equipment"
+              src="/images/services/technician.jpg"
+              alt="HVAC technician servicing residential heating and cooling equipment"
               fill
               sizes="(max-width: 900px) 100vw, 46vw"
               className="zoom-img"

@@ -78,13 +78,24 @@ export function Header() {
               aria-expanded={servicesOpen}
               aria-haspopup="true"
               aria-controls={panelId}
-              onClick={() => setServicesOpen((v) => !v)}
-              onFocus={() => setServicesOpen(true)}
+              onClick={() => {
+                if (typeof window !== "undefined" && window.matchMedia("(pointer: fine)").matches) {
+                  setServicesOpen(true);
+                  return;
+                }
+                setServicesOpen((v) => !v);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "ArrowDown") {
+                  e.preventDefault();
+                  setServicesOpen(true);
+                }
+              }}
             >
               Services
               <span aria-hidden="true">▾</span>
             </button>
-            <div id={panelId} className="mega" role="region" aria-labelledby={btnId} hidden={!servicesOpen}>
+            <div id={panelId} className="mega" role="region" aria-labelledby={btnId}>
               {serviceGroups.map((group) => (
                 <div key={group.id} className="mega-col">
                   <p className="mega-label">{group.label}</p>
@@ -126,7 +137,7 @@ export function Header() {
         </div>
       </div>
 
-      <div id="mobile-drawer" className={`mobile-drawer${menuOpen ? " open" : ""}`} hidden={!menuOpen}>
+      <div id="mobile-drawer" className={`mobile-drawer${menuOpen ? " open" : ""}`} hidden={!menuOpen} inert={!menuOpen || undefined}>
         <nav aria-label="Mobile">
           <Link href="/emergency-hvac-newark-de/" className="mobile-link emergency" onClick={closeAll}>
             Emergency HVAC
