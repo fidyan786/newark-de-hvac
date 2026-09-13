@@ -119,11 +119,17 @@ export function ChatApp({ boot, initialOpen = false }: { boot: ChatBoot; initial
     trackChat("chat_open", { page: slugFromPath(pathname) });
   };
 
-  const closeChat = () => {
+  const closeChat = useCallback(() => {
     setOpen(false);
-    const target = launcherRef.current || lastFocus.current;
-    window.setTimeout(() => target?.focus(), 0);
-  };
+  }, []);
+
+  useEffect(() => {
+    if (open || !started) return;
+    const id = window.setTimeout(() => {
+      (launcherRef.current || lastFocus.current)?.focus();
+    }, 30);
+    return () => window.clearTimeout(id);
+  }, [open, started]);
 
   useEffect(() => {
     if (open && !started) begin();
@@ -173,7 +179,7 @@ export function ChatApp({ boot, initialOpen = false }: { boot: ChatBoot; initial
     }
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
-  }, [open]);
+  }, [open, closeChat]);
 
   useEffect(() => {
     const vv = window.visualViewport;
@@ -261,6 +267,7 @@ export function ChatApp({ boot, initialOpen = false }: { boot: ChatBoot; initial
         aria-modal="true"
         aria-labelledby={titleId}
         hidden={!open}
+        inert={!open ? true : undefined}
         tabIndex={-1}
       >
         <div className="nhp-head">
