@@ -25,11 +25,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
+  width: auto;
   height: 48px;
   min-height: 48px;
   min-width: 48px;
-  padding: 0;
+  padding: 0 0.9rem 0 0;
+  gap: 0;
   border: 1px solid var(--line);
   background: var(--white);
   color: var(--ink);
@@ -59,6 +60,13 @@
   letter-spacing: -0.04em;
   flex-shrink: 0;
 }
+.nhp-launcher-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  padding-right: 0.15rem;
+}
 .nhp-launcher-dot {
   position: absolute;
   top: 8px;
@@ -68,6 +76,7 @@
   background: var(--accent);
   border-radius: 99px;
 }
+.nhp-launcher-label { display: none !important; }
 .nhp-chat.is-open .nhp-launcher { display: none; }
 
 .nhp-panel {

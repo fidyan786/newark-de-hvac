@@ -113,13 +113,19 @@ img { max-width: 100%; height: auto; }
 .lede { font-size: 1.12rem; color: var(--muted); max-width: 38rem; line-height: 1.7; }
 
 .reveal {
-  opacity: 0;
-  transform: translateY(14px);
-  animation: rise 0.65s ease forwards;
+  animation: none;
 }
-.reveal-d1 { animation-delay: 0.08s; }
-.reveal-d2 { animation-delay: 0.16s; }
-@keyframes rise { to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    animation: rise 0.65s ease both;
+  }
+  .reveal-d1 { animation-delay: 0.08s; }
+  .reveal-d2 { animation-delay: 0.16s; }
+}
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
 .zoom-img { transition: transform 0.7s ease; object-fit: cover; }
 .img-hover:hover .zoom-img, .ed-row:hover .zoom-img { transform: scale(1.03); }
 
@@ -256,11 +262,11 @@ img { max-width: 100%; height: auto; }
 
 .home-hero {
   background: var(--white);
-  padding: 4.5rem 0 3.5rem;
+  padding: 3rem 0 2.5rem;
 }
 .home-hero h1 {
   font-size: clamp(2.25rem, 5.2vw, 4.25rem);
-  max-width: 11.5ch;
+  max-width: 16ch;
   margin: 0 0 1.1rem;
 }
 .hero-grid, .page-hero-grid {
@@ -276,7 +282,7 @@ img { max-width: 100%; height: auto; }
   border-radius: 4px;
   overflow: hidden;
 }
-.hero-photo { min-height: 420px; }
+.hero-photo { min-height: 280px; }
 .hero-photo img, .split-photo img { object-fit: cover; }
 
 .trust-strip { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
@@ -428,8 +434,9 @@ img { max-width: 100%; height: auto; }
   .problem-grid { grid-template-columns: 1fr 1fr; gap: 0 2.5rem; }
   .process-grid { grid-template-columns: repeat(3, 1fr); }
   .ed-row, .split, .hero-grid, .page-hero-grid, .cta-inner, .footer-grid { grid-template-columns: 1.05fr 0.95fr; }
+  .hero-grid { grid-template-columns: 0.9fr 1.1fr; }
   .ed-row.flip .ed-photo { order: 2; }
-  .hero-photo, .split-photo, .ed-photo { min-height: 440px; }
+  .hero-photo, .split-photo, .ed-photo { min-height: 520px; }
   .footer-grid { grid-template-columns: 1.4fr 1fr 1fr 1fr; }
   .lead-form.two { grid-template-columns: 1fr 1fr; }
 }
