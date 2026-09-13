@@ -8,7 +8,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/", "/reviews/"],
+        disallow: ["/api/", "/reviews/", "/gsc-verify/"],
       },
     ],
     sitemap: absoluteUrl("/sitemap.xml", site.siteUrl),

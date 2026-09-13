@@ -1,7 +1,23 @@
 import { NextRequest, NextResponse } from "next/server";
 import { buildCsp, staticSecurityHeaders } from "@/lib/csp";
+import { googleHtmlVerificationCode } from "@/lib/gsc";
 
 export function proxy(request: NextRequest) {
+  const htmlVerify = request.nextUrl.pathname.match(/^\/google([A-Za-z0-9_-]+)\.html\/?$/);
+  if (htmlVerify) {
+    const expected = googleHtmlVerificationCode();
+    if (!expected || expected !== htmlVerify[1]) {
+      return new NextResponse("Not found", { status: 404 });
+    }
+    return new NextResponse(`google-site-verification: google${htmlVerify[1]}.html\n`, {
+      status: 200,
+      headers: {
+        "Content-Type": "text/html; charset=utf-8",
+        "Cache-Control": "public, max-age=300",
+      },
+    });
+  }
+
   const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
   const csp = buildCsp(nonce, process.env.NODE_ENV !== "production", process.env.NEXT_PUBLIC_GA4 || "");
 

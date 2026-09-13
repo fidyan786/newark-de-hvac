@@ -6,6 +6,7 @@ import { ChatWidget } from "@/components/ChatWidget";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { MobileCallBar } from "@/components/MobileCallBar";
+import { googleSiteVerification } from "@/lib/gsc";
 import { OG_IMAGE_ALT, OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH, ogImageAbsolute } from "@/lib/seo";
 import { site } from "@/lib/site";
 import { absoluteUrl } from "@/lib/site-url";
@@ -27,8 +28,11 @@ const display = Source_Serif_4({
   adjustFontFallback: true,
 });
 
+const googleVerification = googleSiteVerification();
+
 export const metadata: Metadata = {
   metadataBase: new URL(site.siteUrl),
+  ...(googleVerification ? { verification: { google: googleVerification } } : {}),
   title: {
     default: "HVAC Service in Newark, DE | Newark HVAC Pros",
     template: "%s",

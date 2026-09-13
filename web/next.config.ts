@@ -32,7 +32,10 @@ const nextConfig: NextConfig = {
     ];
   },
   async rewrites() {
-    return [{ source: "/sitemap.xml/", destination: "/sitemap.xml" }];
+    return [
+      { source: "/sitemap.xml/", destination: "/sitemap.xml" },
+      { source: "/google:code.html", destination: "/gsc-verify/:code" },
+    ];
   },
   async headers() {
     return [

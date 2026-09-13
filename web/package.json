@@ -4,12 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npx --yes tsx scripts/write-sitemap.ts && next build",
     "start": "next start",
     "lint": "eslint",
     "test:chat": "npx --yes tsx lib/chat/engine.test.ts",
     "test:site-url": "npx --yes tsx lib/site-url.test.ts",
-    "test:seo": "npx --yes tsx lib/site-url.test.ts && npx --yes tsx lib/schema.test.ts && npx --yes tsx lib/sitemap.test.ts"
+    "test:seo": "npx --yes tsx lib/site-url.test.ts && npx --yes tsx lib/schema.test.ts && npx --yes tsx lib/sitemap.test.ts && npx --yes tsx lib/gsc.test.ts"
   },
   "dependencies": {
     "next": "16.3.5",
