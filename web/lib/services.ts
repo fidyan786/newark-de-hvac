@@ -28,8 +28,8 @@ export const services: ServiceContent[] = [
     h1: "Emergency HVAC in Newark, DE",
     eyebrow: "Urgent heating & cooling",
     lede: "When a Newark home loses heat on a January night or cooling in a humid July stretch, the next step is a phone call — not a long form. Tell us the ZIP and the symptom. We will help you decide what to do next.",
-    image: "/images/emergency/technician-work.jpg",
-    imageAlt: "HVAC technician working on mechanical equipment during a service call",
+    image: "/images/furnace/mechanical-room.jpg",
+    imageAlt: "Residential mechanical room with heating equipment",
     problems: [
       "No heat when outdoor temperatures drop",
       "No air conditioning during a heat and humidity spike",
