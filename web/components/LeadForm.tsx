@@ -37,7 +37,7 @@ export function LeadForm() {
   }
 
   return (
-    <form className="lead-form two" onSubmit={onSubmit}>
+    <form className="lead-form two" onSubmit={onSubmit} noValidate={false}>
       <label>
         Name
         <input name="name" autoComplete="name" required maxLength={120} />
@@ -48,7 +48,7 @@ export function LeadForm() {
       </label>
       <label>
         ZIP
-        <input name="zip" inputMode="numeric" autoComplete="postal-code" required maxLength={10} />
+        <input name="zip" inputMode="numeric" autoComplete="postal-code" required maxLength={10} pattern="\d{5}" />
       </label>
       <label>
         Service needed
@@ -70,6 +70,12 @@ export function LeadForm() {
         Message
         <textarea name="message" rows={4} maxLength={2000} />
       </label>
+      <div className="lead-honey" aria-hidden="true">
+        <label>
+          Company website
+          <input name="company_url" tabIndex={-1} autoComplete="off" />
+        </label>
+      </div>
       {error ? (
         <p className="form-err full" role="alert">
           {error}

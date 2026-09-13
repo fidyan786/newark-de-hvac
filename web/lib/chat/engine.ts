@@ -315,9 +315,9 @@ export class ChatEngine {
   private reviewsReply(): EngineReply {
     this.session.reviewsAsk = false;
     return {
-      text: "We do not publish ratings, licenses, or guarantees here unless they are verified. Real reviews will appear on the reviews page when they exist.",
+      text: "We do not publish ratings or guarantees here unless they are verified.",
       actions: this.convertCtas(),
-      links: [{ href: "/reviews/", label: "Reviews" }],
+      links: [{ href: "/contact/", label: "Contact" }],
       intent: "GENERAL_QUESTION",
     };
   }

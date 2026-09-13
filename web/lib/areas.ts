@@ -75,12 +75,12 @@ export const areas: AreaPage[] = [
     zip: "19702",
     body: [
       {
-        h: "Why Glasgow searches separately",
-        p: "People type “HVAC Glasgow DE” because it is a named place, not because the weather is different. Humidity and January cold are the same problem set as Newark.",
+        h: "How Glasgow fits the Newark map",
+        p: "Glasgow is its own named community, not a Newark neighborhood with a different sign. Humidity and January cold are the same problem set as Newark.",
       },
     ],
     faqs: [
-      { q: "Do you treat Glasgow as a separate company?", a: "No. Same phone, same technicians, named page because the search is local." },
+      { q: "Do you treat Glasgow as a separate company?", a: "No. Same team, same phone path. Glasgow is on the Newark dispatch map." },
     ],
   },
   {

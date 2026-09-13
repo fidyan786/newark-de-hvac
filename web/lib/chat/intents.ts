@@ -21,7 +21,7 @@ export function normalize(text: string) {
 }
 
 const SAFETY =
-  /\b(gas leak|smell gas|smells like gas|natural gas odor|carbon monoxide|\bco alarm\b|co detector|smoke in the|on fire|house is on fire|electrical spark|sparking|burning electrical|smell(s)? burnt|burning smell|gas smell|smell of gas)\b/;
+  /\b(gas leak|smell gas|smells like gas|natural gas odor|carbon monoxide|\bco alarm\b|co detector|smoke in the|smell smoke|smoke coming|visible smoke|smoke alarm|on fire|house (?:is )?on fire|house fire|\bfire(?!place)\b|electrical (?:spark|fire|danger)|sparking|burning electrical|smell(s)? burnt|burning smell|gas smell|smell of gas|immediate (?:danger|emergency))\b/;
 
 const PRICING =
   /\b(how much|what(?: is|'s) the (?:cost|price)|cost of|price of|pricing|estimate|quote|financing|payment plan|discount|coupon|\$\d)\b/;

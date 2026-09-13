@@ -29,7 +29,7 @@ export function sameOrigin(req: Request) {
     }
   }
   const referer = req.headers.get("referer") || "";
-  if (!referer) return true;
+  if (!referer) return false;
   try {
     return new URL(referer).host === host;
   } catch {

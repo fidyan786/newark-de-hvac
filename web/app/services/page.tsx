@@ -1,12 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
-import { CtaBand } from "@/components/PageHero";
 import { CallLink } from "@/components/CallLink";
+import { JsonLd } from "@/components/JsonLd";
+import { Breadcrumbs, CtaBand } from "@/components/PageHero";
+import { breadcrumbJsonLd } from "@/lib/schema";
 import { pageMeta } from "@/lib/seo";
 import { serviceCategories } from "@/lib/nav";
+import { site } from "@/lib/site";
+import { absoluteUrl } from "@/lib/site-url";
 
 export const metadata = pageMeta({
-  title: "HVAC Services in Newark, DE | Heating & Cooling",
+  title: "Heating, Cooling & HVAC Services | Newark HVAC Pros",
   description:
     "HVAC services in Newark, Delaware: AC repair and installation, furnace service, heat pumps, indoor air quality, and commercial HVAC.",
   path: "/services/",
@@ -15,10 +19,26 @@ export const metadata = pageMeta({
 export default function ServicesHub() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", url: absoluteUrl("/", site.siteUrl) },
+          { name: "Services", url: absoluteUrl("/services/", site.siteUrl) },
+        ])}
+      />
+      <div className="page-top">
+        <div className="wrap">
+          <Breadcrumbs
+            items={[
+              { href: "/", label: "Home" },
+              { href: "/services/", label: "Services" },
+            ]}
+          />
+        </div>
+      </div>
       <section className="page-hero">
-        <div className="wrap" style={{ maxWidth: 720 }}>
+        <div className="wrap-prose">
           <p className="eyebrow">Newark, Delaware</p>
-          <h1>HVAC services</h1>
+          <h1>HVAC services in Newark, DE</h1>
           <p className="lede">
             Cooling, heating, heat pumps, indoor air, and light commercial work — organized the way homeowners actually
             look for help.

@@ -1,6 +1,11 @@
 import Link from "next/link";
-import { CtaBand } from "@/components/PageHero";
+import { JsonLd } from "@/components/JsonLd";
+import { Breadcrumbs, CtaBand } from "@/components/PageHero";
+import { breadcrumbJsonLd } from "@/lib/schema";
 import { pageMeta } from "@/lib/seo";
+import { serviceHref } from "@/lib/paths";
+import { site } from "@/lib/site";
+import { absoluteUrl } from "@/lib/site-url";
 
 export const metadata = pageMeta({
   title: "HVAC Resources | Newark HVAC Pros",
@@ -11,22 +16,22 @@ export const metadata = pageMeta({
 
 const articles = [
   {
-    href: "/hvac-maintenance-newark-de/",
+    href: serviceHref("hvac-maintenance-newark-de"),
     title: "Seasonal HVAC maintenance",
     text: "What a checkup actually covers before Newark’s cooling and heating seasons.",
   },
   {
-    href: "/indoor-air-quality-newark-de/",
+    href: serviceHref("indoor-air-quality-newark-de"),
     title: "Humidity and indoor air",
     text: "Why mixed-humid summers make “almost cool” feel like the system failed.",
   },
   {
-    href: "/emergency-hvac-newark-de/",
+    href: serviceHref("emergency-hvac-newark-de"),
     title: "When the system stops",
     text: "No heat, no cooling, or a carbon monoxide alarm — what to do first.",
   },
   {
-    href: "/heat-pump-repair-newark-de/",
+    href: serviceHref("heat-pump-repair-newark-de"),
     title: "Heat pumps in Delaware",
     text: "One machine for both seasons, and why winter capacity still matters here.",
   },
@@ -35,8 +40,24 @@ const articles = [
 export default function ResourcesPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", url: absoluteUrl("/", site.siteUrl) },
+          { name: "Resources", url: absoluteUrl("/resources/", site.siteUrl) },
+        ])}
+      />
+      <div className="page-top">
+        <div className="wrap">
+          <Breadcrumbs
+            items={[
+              { href: "/", label: "Home" },
+              { href: "/resources/", label: "Resources" },
+            ]}
+          />
+        </div>
+      </div>
       <section className="page-hero">
-        <div className="wrap" style={{ maxWidth: 720 }}>
+        <div className="wrap-prose">
           <p className="eyebrow">Resources</p>
           <h1>Heating and cooling notes for Newark homes</h1>
           <p className="lede">
@@ -49,7 +70,7 @@ export default function ResourcesPage() {
         <div className="wrap problem-grid">
           {articles.map((a) => (
             <Link className="problem-card" href={a.href} key={a.href}>
-              <h2 style={{ fontSize: "1.35rem" }}>{a.title}</h2>
+              <h2 className="local-h">{a.title}</h2>
               <p>{a.text}</p>
             </Link>
           ))}

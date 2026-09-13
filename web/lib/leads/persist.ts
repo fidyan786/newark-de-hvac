@@ -1,5 +1,6 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { isAllowedWebhookUrl } from "@/lib/security";
 
 export type LeadPayload = {
   name: string;
@@ -55,6 +56,9 @@ export function validateLead(
 export async function persistLead(payload: LeadPayload): Promise<{ stored: boolean; error?: string }> {
   const hook = process.env.FORM_WEBHOOK;
   if (hook) {
+    if (!isAllowedWebhookUrl(hook)) {
+      return { stored: false, error: "unavailable" };
+    }
     try {
       const res = await fetch(hook, {
         method: "POST",

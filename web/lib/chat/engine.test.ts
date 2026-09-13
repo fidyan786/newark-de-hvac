@@ -36,8 +36,8 @@ function run(messages: Array<string | { text?: string; actionId?: string }>, pag
 }
 
 console.log("Opening / page context");
-assert("home greeting", run([]).opening.text.includes("how can we help"));
-assert("ac page greeting", run([], "ac-repair-newark-de").opening.text.includes("AC repair"));
+assert("home greeting", /how can we help/i.test(run([]).opening.text));
+assert("ac page greeting", run([], "ac-repair-newark-de").opening.text.includes("your AC"));
 assert("furnace page greeting", run([], "furnace-repair-newark-de").opening.text.includes("furnace"));
 assert("commercial page greeting", run([], "commercial-hvac-newark-de").opening.text.includes("commercial"));
 

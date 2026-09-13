@@ -9,15 +9,15 @@ export const metadata = pageMeta({
 export default function TermsPage() {
   return (
     <section className="section">
-      <div className="wrap" style={{ maxWidth: 760 }}>
+      <div className="wrap-prose">
         <h1>Terms of use</h1>
         <p>
           This website describes heating and cooling services for Newark, Delaware. Content is informational. It is not
           a bid or a guarantee of dispatch time.
         </p>
         <p>
-          Requesting service does not create a contract until the visit is confirmed. Gas odors and carbon monoxide
-          alarms are utility / 911 situations.
+          Requesting service does not create a contract until the visit is confirmed. Gas odors, carbon monoxide alarms,
+          fire, smoke, and electrical danger are utility or emergency-service situations — leave the area first.
         </p>
       </div>
     </section>

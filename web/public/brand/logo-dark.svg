@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 36" fill="none" role="img" aria-label="Newark HVAC Pros">
+  <rect x="1.25" y="1.25" width="33.5" height="33.5" stroke="#C4B49A" stroke-width="1.5"/>
+  <path d="M10 26V10h3.15l7.1 10.4V10H24v16h-3.2L13.65 15.5V26H10Z" fill="#F4F1EA"/>
+  <path d="M10 26h14" stroke="#C4B49A" stroke-width="1.25"/>
+  <text x="48" y="16" font-family="Georgia, 'Times New Roman', serif" font-size="15" font-weight="600" fill="#F4F1EA">Newark</text>
+  <text x="48" y="30" font-family="system-ui, sans-serif" font-size="8" letter-spacing="2.2" fill="#C4B49A">HVAC PROS</text>
+</svg>

@@ -1,4 +1,5 @@
 import { areas } from "../areas";
+import { serviceHref } from "../paths";
 import { services } from "../services";
 import { site } from "../site";
 import type { ChatAction, ChatBoot, ChatLink, Intent } from "./types";
@@ -7,7 +8,8 @@ const serviceExists = new Set(services.map((s) => s.slug));
 const areaExists = new Set(areas.map((a) => a.slug));
 
 function page(slug: string, label: string): ChatLink | null {
-  if (serviceExists.has(slug) || areaExists.has(slug) || slug === "service-area" || slug === "contact" || slug === "services") {
+  if (serviceExists.has(slug)) return { href: serviceHref(slug), label };
+  if (areaExists.has(slug) || slug === "service-area" || slug === "contact" || slug === "services") {
     return { href: `/${slug}/`, label };
   }
   return null;
@@ -16,25 +18,25 @@ function page(slug: string, label: string): ChatLink | null {
 export const SERVICE_FOR_INTENT: Record<Intent, ChatLink | null> = {
   AC_REPAIR: page("ac-repair-newark-de", "View AC Repair"),
   AC_INSTALLATION: page("ac-installation-newark-de", "AC Installation"),
-  AC_REPLACEMENT: page("hvac-replacement-newark-de", "HVAC Replacement"),
-  AC_MAINTENANCE: page("hvac-maintenance-newark-de", "HVAC Maintenance"),
+  AC_REPLACEMENT: page("ac-replacement-newark-de", "AC Replacement"),
+  AC_MAINTENANCE: page("ac-maintenance-newark-de", "AC Maintenance"),
   FURNACE_REPAIR: page("furnace-repair-newark-de", "View Furnace Repair"),
   FURNACE_INSTALLATION: page("furnace-installation-newark-de", "Furnace Installation"),
-  FURNACE_REPLACEMENT: page("hvac-replacement-newark-de", "HVAC Replacement"),
-  FURNACE_MAINTENANCE: page("hvac-maintenance-newark-de", "HVAC Maintenance"),
-  HEATING_REPAIR: page("furnace-repair-newark-de", "View Heating Repair"),
-  HVAC_REPAIR: page("emergency-hvac-newark-de", "HVAC Repair"),
+  FURNACE_REPLACEMENT: page("furnace-replacement-newark-de", "Furnace Replacement"),
+  FURNACE_MAINTENANCE: page("furnace-maintenance-newark-de", "Furnace Maintenance"),
+  HEATING_REPAIR: page("heating-repair-newark-de", "View Heating Repair"),
+  HVAC_REPAIR: page("hvac-repair-newark-de", "HVAC Repair"),
   HVAC_REPLACEMENT: page("hvac-replacement-newark-de", "HVAC Replacement"),
   HVAC_MAINTENANCE: page("hvac-maintenance-newark-de", "View Maintenance"),
   HEAT_PUMP_REPAIR: page("heat-pump-repair-newark-de", "Heat Pump Repair"),
   HEAT_PUMP_INSTALLATION: page("heat-pump-installation-newark-de", "Heat Pump Installation"),
-  HEAT_PUMP_MAINTENANCE: page("hvac-maintenance-newark-de", "Heat Pump Maintenance"),
+  HEAT_PUMP_MAINTENANCE: page("heat-pump-maintenance-newark-de", "Heat Pump Maintenance"),
   DUCTLESS: page("ductless-mini-split-newark-de", "Ductless Mini Splits"),
-  MINI_SPLIT: page("ductless-mini-split-newark-de", "Ductless Mini Splits"),
+  MINI_SPLIT: page("mini-split-repair-newark-de", "Mini Split Repair"),
   INDOOR_AIR_QUALITY: page("indoor-air-quality-newark-de", "Indoor Air Quality"),
-  AIR_FILTRATION: page("indoor-air-quality-newark-de", "Air Filtration"),
-  HUMIDITY: page("indoor-air-quality-newark-de", "Indoor Air Quality"),
-  DUCTWORK: page("duct-cleaning-newark-de", "Ductwork"),
+  AIR_FILTRATION: page("air-filtration-newark-de", "Air Filtration"),
+  HUMIDITY: page("humidifiers-dehumidifiers-newark-de", "Humidity Control"),
+  DUCTWORK: page("ductwork-newark-de", "Ductwork"),
   COMMERCIAL_HVAC: page("commercial-hvac-newark-de", "Commercial HVAC"),
   EMERGENCY: page("emergency-hvac-newark-de", "Emergency HVAC"),
   SERVICE_AREA: page("service-area", "Service Area"),
@@ -92,7 +94,7 @@ export const PAGE_OPENINGS: Record<string, { greeting: string; intent?: Intent; 
     ],
   },
   "ac-repair-newark-de": {
-    greeting: "Looking for AC repair in Newark?",
+    greeting: "Looking for help with your AC?",
     intent: "AC_REPAIR",
     actions: ["running_warm", "wont_turn_on", "ac_leak", "request_service", "call_now"],
   },
@@ -100,6 +102,21 @@ export const PAGE_OPENINGS: Record<string, { greeting: string; intent?: Intent; 
     greeting: "Looking at a new air conditioner for your Newark home?",
     intent: "AC_INSTALLATION",
     actions: ["installation", "ac_problem", "request_service", "call_now"],
+  },
+  "ac-replacement-newark-de": {
+    greeting: "Considering an air conditioner replacement?",
+    intent: "AC_REPLACEMENT",
+    actions: ["installation", "ac_problem", "request_service", "call_now"],
+  },
+  "ac-maintenance-newark-de": {
+    greeting: "Need an AC checkup in Newark?",
+    intent: "AC_MAINTENANCE",
+    actions: ["maintenance", "ac_problem", "request_service", "call_now"],
+  },
+  "emergency-ac-repair-newark-de": {
+    greeting: "If cooling is down, we can help you take the next step.",
+    intent: "EMERGENCY",
+    actions: ["ac_problem", "request_service", "call_now"],
   },
   "furnace-repair-newark-de": {
     greeting: "Need help with a furnace problem?",
@@ -111,6 +128,31 @@ export const PAGE_OPENINGS: Record<string, { greeting: string; intent?: Intent; 
     intent: "FURNACE_INSTALLATION",
     actions: ["installation", "heating_problem", "request_service", "call_now"],
   },
+  "furnace-replacement-newark-de": {
+    greeting: "Considering a furnace replacement?",
+    intent: "FURNACE_REPLACEMENT",
+    actions: ["installation", "heating_problem", "request_service", "call_now"],
+  },
+  "furnace-maintenance-newark-de": {
+    greeting: "Need furnace maintenance in Newark?",
+    intent: "FURNACE_MAINTENANCE",
+    actions: ["maintenance", "heating_problem", "request_service", "call_now"],
+  },
+  "heating-repair-newark-de": {
+    greeting: "Need help with a heating problem?",
+    intent: "HEATING_REPAIR",
+    actions: ["no_heat", "not_turning_on", "request_service", "call_now"],
+  },
+  "emergency-heating-newark-de": {
+    greeting: "If the heat is down, we can help you take the next step.",
+    intent: "EMERGENCY",
+    actions: ["heating_problem", "request_service", "call_now"],
+  },
+  "hvac-repair-newark-de": {
+    greeting: "Need HVAC repair in Newark?",
+    intent: "HVAC_REPAIR",
+    actions: ["ac_problem", "heating_problem", "request_service", "call_now"],
+  },
   "heat-pump-repair-newark-de": {
     greeting: "Need help with a heat pump?",
     intent: "HEAT_PUMP_REPAIR",
@@ -120,6 +162,11 @@ export const PAGE_OPENINGS: Record<string, { greeting: string; intent?: Intent; 
     greeting: "Looking at heat pump installation?",
     intent: "HEAT_PUMP_INSTALLATION",
     actions: ["hp_install", "hp_repair", "request_service", "call_now"],
+  },
+  "heat-pump-maintenance-newark-de": {
+    greeting: "Need heat pump maintenance?",
+    intent: "HEAT_PUMP_MAINTENANCE",
+    actions: ["maintenance", "heat_pump", "request_service", "call_now"],
   },
   "hvac-replacement-newark-de": {
     greeting: "Considering an HVAC replacement in Newark?",
@@ -141,12 +188,32 @@ export const PAGE_OPENINGS: Record<string, { greeting: string; intent?: Intent; 
     intent: "DUCTLESS",
     actions: ["mini_split", "request_service", "call_now"],
   },
+  "mini-split-repair-newark-de": {
+    greeting: "Need mini split repair?",
+    intent: "MINI_SPLIT",
+    actions: ["mini_split", "request_service", "call_now"],
+  },
+  "mini-split-installation-newark-de": {
+    greeting: "Looking at mini split installation?",
+    intent: "MINI_SPLIT",
+    actions: ["mini_split", "installation", "request_service", "call_now"],
+  },
   "indoor-air-quality-newark-de": {
     greeting: "Looking for indoor air quality help in Newark?",
     intent: "INDOOR_AIR_QUALITY",
     actions: ["iaq", "ductwork", "request_service", "call_now"],
   },
-  "duct-cleaning-newark-de": {
+  "air-filtration-newark-de": {
+    greeting: "Looking for air filtration help?",
+    intent: "AIR_FILTRATION",
+    actions: ["iaq", "request_service", "call_now"],
+  },
+  "humidifiers-dehumidifiers-newark-de": {
+    greeting: "Need help with humidity in the house?",
+    intent: "HUMIDITY",
+    actions: ["iaq", "request_service", "call_now"],
+  },
+  "ductwork-newark-de": {
     greeting: "Need help with ducts or airflow?",
     intent: "DUCTWORK",
     actions: ["ductwork", "iaq", "request_service", "call_now"],
@@ -155,6 +222,21 @@ export const PAGE_OPENINGS: Record<string, { greeting: string; intent?: Intent; 
     greeting: "Looking for commercial HVAC service?",
     intent: "COMMERCIAL_HVAC",
     actions: ["commercial", "request_service", "call_now"],
+  },
+  "commercial-ac-newark-de": {
+    greeting: "Looking for commercial air conditioning service?",
+    intent: "COMMERCIAL_HVAC",
+    actions: ["commercial", "request_service", "call_now"],
+  },
+  "commercial-heating-newark-de": {
+    greeting: "Looking for commercial heating service?",
+    intent: "COMMERCIAL_HVAC",
+    actions: ["commercial", "request_service", "call_now"],
+  },
+  "commercial-hvac-maintenance-newark-de": {
+    greeting: "Need commercial HVAC maintenance?",
+    intent: "COMMERCIAL_HVAC",
+    actions: ["commercial", "maintenance", "request_service", "call_now"],
   },
   "service-area": {
     greeting: "Wondering if we cover your town?",
@@ -196,7 +278,7 @@ export const PAGE_OPENINGS: Record<string, { greeting: string; intent?: Intent; 
     actions: ["ac_problem", "heating_problem", "request_service", "call_now"],
   },
   "christiana-de-hvac": {
-    greeting: "Looking for HVAC service in Christiana?",
+    greeting: "Looking for commercial HVAC service?",
     actions: ["ac_problem", "heating_problem", "commercial", "request_service", "call_now"],
   },
 };
@@ -205,7 +287,7 @@ export const ACTION_META: Record<string, { label: string; intent?: Intent; probl
   ac_problem: { label: "AC Problem", intent: "AC_REPAIR", problem: "AC / cooling problem", patch: { equipment: "ac" } },
   heating_problem: { label: "Heating Problem", intent: "HEATING_REPAIR", problem: "Heating problem", patch: { equipment: "furnace" } },
   hvac_repair: { label: "HVAC Repair", intent: "HVAC_REPAIR", problem: "HVAC repair" },
-  installation: { label: "Installation / Replacement", intent: "HVAC_REPLACEMENT", problem: "Installation / replacement" },
+  installation: { label: "Installation", intent: "HVAC_REPLACEMENT", problem: "Installation / replacement" },
   maintenance: { label: "Maintenance", intent: "HVAC_MAINTENANCE", problem: "Maintenance" },
   heat_pump: { label: "Heat Pump", intent: "HEAT_PUMP_REPAIR", problem: "Heat pump", patch: { equipment: "heat_pump" } },
   iaq: { label: "Indoor Air Quality", intent: "INDOOR_AIR_QUALITY", problem: "Indoor air quality", patch: { equipment: "iaq" } },
@@ -251,11 +333,11 @@ export function callAction(boot: ChatBoot): ChatAction {
     return {
       id: "call_now",
       kind: "call",
-      label: "Call for Service",
+      label: "Call Now",
       href: `tel:${boot.phoneTel}`,
     };
   }
-  return { id: "contact", kind: "link", label: "Call for Service", href: "/contact/" };
+  return { id: "contact", kind: "link", label: "Call Now", href: "/contact/" };
 }
 
 export function requestAction(): ChatAction {
