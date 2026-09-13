@@ -68,8 +68,10 @@ export function Header() {
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
+    document.body.classList.toggle("drawer-open", menuOpen);
     return () => {
       document.body.style.overflow = "";
+      document.body.classList.remove("drawer-open");
     };
   }, [menuOpen]);
 
